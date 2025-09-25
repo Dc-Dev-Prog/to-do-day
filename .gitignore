@@ -1,0 +1,5 @@
+**/build
+**/Move.lock
+**/.backup
+**/.expo-shared
+**/.vscode

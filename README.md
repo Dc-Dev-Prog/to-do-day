@@ -14,6 +14,9 @@ Un proyecto completo de desarrollo en Sui utilizando Move como lenguaje de contr
 - [📖 Documentación Detallada](#documentación-detallada)
 - [🔧 Configuración](#configuración)
 - [📊 Estado del Proyecto](#estado-del-proyecto)
+- [🤝 Contribuir](#contribuir)
+- [📞 Soporte](#soporte)
+- [📄 Licencia](#licencia)
 
 ---
 
@@ -86,7 +89,11 @@ Hemos desarrollado un conjunto completo de scripts PowerShell para automatizar t
 
 ## 📖 Documentación Detallada
 
-### 📚 Guías Completas por Script
+### � Documentación Oficial
+
+- **[🏆 Sui Certification Day Code](docs/Sui%20Certification%20Day%20Code.md)** - Documentación oficial de certificación con guías paso a paso para el desarrollo en Sui y Move
+
+### �📚 Guías Completas por Script
 
 - **[🚀 Script de Despliegue](docs/deploy-script.md)**
   - Configuración de red automática
@@ -112,12 +119,12 @@ Hemos desarrollado un conjunto completo de scripts PowerShell para automatizar t
   - Verificación de balance
   - Planificación financiera
 
-### 🎯 Casos de Uso Específicos
+### 📚 Casos de Uso Específicos
 
-- **[🆕 Primer Despliegue](docs/casos-uso/primer-despliegue.md)** - Guía para principiantes
-- **[🔄 Actualización de Contratos](docs/casos-uso/actualizar-contratos.md)** - Flujo de actualización
-- **[🌐 Cambio de Redes](docs/casos-uso/cambio-redes.md)** - Testnet, Mainnet, Devnet
-- **[🐛 Solución de Problemas](docs/casos-uso/troubleshooting.md)** - Errores comunes
+- **[🆕 Primer Despliegue](docs/casos-uso/primer-despliegue.md)** - Guía para principiantes ✅
+- **🔄 Actualización de Contratos** - Flujo de actualización 🚧 *En desarrollo*
+- **🌐 Cambio de Redes** - Testnet, Mainnet, Devnet 🚧 *En desarrollo*
+- **🐛 Solución de Problemas** - Errores comunes 🚧 *En desarrollo*
 
 ---
 
@@ -165,6 +172,8 @@ sui client active-env
 - 🎨 **UX**: Interface interactiva con emojis y colores
 - 📱 **Compatibilidad**: PowerShell 7.0+ en Windows
 - 🔒 **Seguridad**: Validaciones y confirmaciones incluidas
+- 📄 **Licencia**: MIT License implementada
+- 🛡️ **Código de Conducta**: Políticas de comunidad establecidas
 
 ### 🎉 Funcionalidades Destacadas
 
@@ -193,22 +202,36 @@ graph TD
 
 ## 🤝 Contribuir
 
-¡Las contribuciones son bienvenidas! Por favor:
+¡Las contribuciones son bienvenidas! Por favor lee nuestro [Código de Conducta](CODE_OF_CONDUCT.md) antes de participar.
 
-1. 🍴 Fork el proyecto
-2. 🌟 Crea tu feature branch (`git checkout -b feature/AmazingFeature`)
-3. 💾 Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. 📤 Push al branch (`git push origin feature/AmazingFeature`)
-5. 🔀 Abre un Pull Request
+### 📋 Proceso de Contribución
+
+1. 🍴 **Fork** el proyecto
+2. 🌟 **Crea** tu feature branch (`git checkout -b feature/AmazingFeature`)
+3. 💾 **Commit** tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. 📤 **Push** al branch (`git push origin feature/AmazingFeature`)
+5. 🔀 **Abre** un Pull Request
+
+### 🛡️ Código de Conducta
+
+Este proyecto adhiere al [Código de Conducta](CODE_OF_CONDUCT.md). Al participar, se espera que mantengas este código. Por favor reporta comportamiento inaceptable al equipo del proyecto.
+
+### 🎯 Tipos de Contribuciones
+
+- 🐛 **Reportar bugs** y problemas
+- 💡 **Sugerir nuevas funcionalidades**
+- 📝 **Mejorar documentación**
+- 🔧 **Contribuir código** y mejoras
+- 🧪 **Probar** en diferentes entornos
 
 ---
 
 ## 📞 Soporte
 
 - 📖 **Documentación**: Ver carpeta `docs/`
-- 🐛 **Issues**: [Reportar problemas](../../issues)
-- 💬 **Discusiones**: [Comunidad](../../discussions)
-- 📧 **Email**: [Contacto directo](mailto:tu-email@ejemplo.com)
+- 🐛 **Issues**: [Reportar problemas](https://github.com/Dc-Dev-Prog/to-do-day/issues)
+- 💬 **Discusiones**: [Comunidad](https://github.com/Dc-Dev-Prog/to-do-day/discussions)
+- 📧 **Email**: [Contacto directo](mailto:dcdevtk@gmail.com)
 
 ---
 

@@ -263,7 +263,7 @@ sui client switch --env testnet
 ### Documentación
 - [📖 Script de Despliegue](../deploy-script.md) - Guía completa del script
 - [💰 Calculadora de Costos](../cost-calculator-script.md) - Entender los costos
-- [🔧 Configuración](../configuracion.md) - Setup inicial completo
+- [� README Principal](../../README.md) - Documentación completa del proyecto
 
 ### Enlaces Útiles
 - **Faucet Testnet**: https://faucet.sui.io/

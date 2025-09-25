@@ -1,38 +1,47 @@
-# 🔄 Script de Actualización Inteligente
+🏠 [Readme](../../README.md) \ 📚 [Docs](../../docs/CONTRIBUTING.md) \ 📕 [Scripts](../script/upgrade-script.md) \ **📖 upgrade-script** \
+
+# Script de Actualización Inteligente
 
 El script `upgrade.ps1` permite actualizar contratos inteligentes existentes en Sui manteniendo el mismo Package ID y estado.
 
-## 📋 Tabla de Contenidos
+## [Tabla de Contenidos](#script-de-actualización-inteligente)
 
+- [Tabla de Contenidos](#tabla-de-contenidos)
 - [Características Principales](#características-principales)
 - [Parámetros del Script](#parámetros-del-script)
 - [Uso Básico](#uso-básico)
 - [Uso Avanzado](#uso-avanzado)
 - [Ejemplos Detallados](#ejemplos-detallados)
 - [Solución de Problemas](#solución-de-problemas)
+- [Mejores Prácticas](#mejores-prácticas)
+- [Integración con Otros Scripts](#integración-con-otros-scripts)
+- [Próximos Pasos](#próximos-pasos)
 
 ---
 
-## Características Principales
+## [Características Principales](#script-de-actualización-inteligente)
 
 ### Detección Automática de UpgradeCaps
+
 - Busca automáticamente UpgradeCaps en tu wallet
 - Lee información del último despliegue desde `ultimo-despliegue.txt`
 - Permite selección interactiva cuando hay múltiples opciones
 
 ### Gestión Inteligente de Paquetes
+
 - Obtiene automáticamente el Package ID desde el UpgradeCap
 - Verifica que el paquete sea actualizable
 - Mantiene el mismo Package ID después de la actualización
 
 ### Validaciones de Seguridad
+
 - Verifica balance suficiente antes de actualizar
 - Compila el proyecto antes de proceder
 - Solicita confirmación antes de ejecutar la actualización
 
 ---
 
-## Parámetros del Script
+## [Parámetros del Script](#script-de-actualización-inteligente)
 
 | Parámetro | Tipo | Descripción |
 |-----------|------|-------------|
@@ -43,21 +52,24 @@ El script `upgrade.ps1` permite actualizar contratos inteligentes existentes en 
 
 ---
 
-## Uso Básico
+## [Uso Básico](#script-de-actualización-inteligente)
 
 ### Actualización Automática
+
 ```powershell
 .\.script\upgrade.ps1
 ```
 
 **Proceso automático:**
+
 1. Detecta UpgradeCaps disponibles
 2. Lee información del último despliegue
 3. Verifica balance y compila código
 4. Ejecuta la actualización
 
 ### Salida Típica
-```
+
+```bash
 🔄 SCRIPT INTELIGENTE DE ACTUALIZACIÓN SUI
 ==========================================
 
@@ -92,33 +104,38 @@ El script `upgrade.ps1` permite actualizar contratos inteligentes existentes en 
 
 ---
 
-## Uso Avanzado
+## [Uso Avanzado](#script-de-actualización-inteligente)
 
 ### Especificar Red
+
 ```powershell
 .\.script\upgrade.ps1 -Red mainnet
 ```
 
 ### Usar UpgradeCap Específico
+
 ```powershell
 .\.script\upgrade.ps1 -UpgradeCapId "0x456789..."
 ```
 
 ### Actualización Completa Manual
+
 ```powershell
 .\.script\upgrade.ps1 -PackageId "0x123abc..." -UpgradeCapId "0x456def..." -Red testnet
 ```
 
 ### Gas Budget Personalizado
+
 ```powershell
 .\.script\upgrade.ps1 -GasBudget "200000000"
 ```
 
 ---
 
-## Ejemplos Detallados
+## [Ejemplos Detallados](#script-de-actualización-inteligente)
 
 ### Ejemplo 1: Primera Actualización
+
 ```powershell
 PS> .\.script\upgrade.ps1
 
@@ -145,6 +162,7 @@ PS> .\.script\upgrade.ps1
 ```
 
 ### Ejemplo 2: Múltiples UpgradeCaps
+
 ```powershell
 PS> .\.script\upgrade.ps1
 
@@ -158,6 +176,7 @@ PS> .\.script\upgrade.ps1
 ```
 
 ### Ejemplo 3: Cambio de Red
+
 ```powershell
 PS> .\.script\upgrade.ps1 -Red mainnet
 
@@ -176,32 +195,38 @@ PS> .\.script\upgrade.ps1 -Red mainnet
 
 ---
 
-## Casos de Uso Específicos
+## [Casos de Uso Específicos](#script-de-actualización-inteligente)
 
 ### Desarrollo Iterativo
+
 ```powershell
 # Actualización rápida durante desarrollo
 .\.script\upgrade.ps1
 ```
+
 > Para actualizaciones frecuentes en testnet
 
 ### Actualización en Producción
+
 ```powershell
 # Actualización segura en mainnet
 .\.script\upgrade.ps1 -Red mainnet -GasBudget "300000000"
 ```
+
 > Con gas adicional para garantizar éxito
 
 ### Gestión de Múltiples Proyectos
+
 ```powershell
 # Usar UpgradeCap específico
 .\.script\upgrade.ps1 -UpgradeCapId "0x456789..."
 ```
+
 > Cuando tienes varios contratos desplegados
 
 ---
 
-## Información Técnica
+## [Información Técnica](#script-de-actualización-inteligente)
 
 ### Diferencias entre Deploy y Upgrade
 
@@ -222,37 +247,46 @@ PS> .\.script\upgrade.ps1 -Red mainnet
 
 ---
 
-## Solución de Problemas
+## [Solución de Problemas](#script-de-actualización-inteligente)
 
 ### Error: "No se encontraron UpgradeCaps"
+
 **Causa**: No hay UpgradeCaps en tu wallet o red incorrecta
 **Soluciones**:
+
 - Verifica que estás en la red correcta
 - Asegúrate de haber desplegado un contrato actualizable
 - Usa `check-packages.ps1` para ver tus paquetes
 
 ### Error: "Error al obtener Package ID"
+
 **Causa**: UpgradeCap inválido o inaccesible
 **Soluciones**:
+
 - Verifica que el UpgradeCap existe: `sui client object <UpgradeCap-ID>`
 - Confirma que tienes permisos sobre el UpgradeCap
 - Usa un UpgradeCap diferente si tienes múltiples
 
 ### Error: "Balance insuficiente"
+
 **Causa**: No tienes suficiente SUI para la actualización
 **Soluciones**:
+
 - Testnet: Usa el faucet https://faucet.sui.io/
 - Mainnet: Transfiere más SUI a tu wallet
 - Reduce el gas budget si es posible
 
 ### Error: "Compilación fallida"
+
 **Causa**: Errores en el código Move actualizado
 **Soluciones**:
+
 - Revisa los errores de compilación
 - Verifica compatibilidad con versión anterior
 - Ejecuta `sui move build` manualmente para ver errores
 
 ### Comandos de Diagnóstico
+
 ```powershell
 # Ver UpgradeCaps disponibles
 sui client objects | Select-String "UpgradeCap"
@@ -269,21 +303,24 @@ sui move build
 
 ---
 
-## Mejores Prácticas
+## [Mejores Prácticas](#script-de-actualización-inteligente)
 
 ### Para Desarrollo
+
 1. **Prueba Primero**: Siempre prueba actualizaciones en testnet
 2. **Compatibilidad**: Mantén compatibilidad con versiones anteriores
 3. **Backup**: Guarda información de UpgradeCaps importantes
 4. **Documentación**: Documenta cambios entre versiones
 
 ### Para Producción
+
 1. **Testing Completo**: Prueba exhaustivamente antes de mainnet
 2. **Gas Generoso**: Usa gas budget alto para mainnet
 3. **Horarios**: Actualiza en horarios de bajo tráfico
 4. **Rollback Plan**: Ten plan de contingencia si algo falla
 
 ### Flujo Recomendado
+
 ```powershell
 # 1. Verificar paquetes existentes
 .\.script\check-packages.ps1
@@ -300,21 +337,24 @@ sui move build
 
 ---
 
-## Integración con Otros Scripts
+## [Integración con Otros Scripts](#script-de-actualización-inteligente)
 
 ### Con check-packages.ps1
+
 ```powershell
 # Ver todos los paquetes disponibles para actualizar
 .\.script\check-packages.ps1 -SoloActualizables
 ```
 
 ### Con calcular-costo-despliegue.ps1
+
 ```powershell
 # Calcular costo antes de actualizar
 .\.script\calcular-costo-despliegue.ps1 solo-actualizacion
 ```
 
 ### Con deploy.ps1
+
 ```powershell
 # Si necesitas desplegar uno nuevo en lugar de actualizar
 .\.script\deploy.ps1 -Actualizable
@@ -322,7 +362,7 @@ sui move build
 
 ---
 
-## Próximos Pasos
+## [Próximos Pasos](#script-de-actualización-inteligente)
 
 Después de una actualización exitosa:
 
@@ -331,4 +371,8 @@ Después de una actualización exitosa:
 3. **Documentar**: Actualiza documentación con los cambios
 4. **Monitorear**: Observa el comportamiento del contrato actualizado
 
+---
+
 **¡Felices actualizaciones en Sui! 🔄**
+
+**Creado con ❤️ por el equipo de desarrollo de [Dc Studio]()**

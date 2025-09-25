@@ -1,33 +1,44 @@
-# 📦 Verificador de Paquetes Inteligente
+🏠[Readme](../../README.md) \ 📚 [Docs](../../docs/documentacion-detallada.md)  \ 📕 [Scripts](../script/check-packages-script.md) \ 📦**check-packages-script** \
+
+# Verificador de Paquetes Inteligente
 
 El script `check-packages.ps1` proporciona una vista completa de todos los paquetes Sui desplegados y sus capabilities de actualización.
 
-## 📋 Tabla de Contenidos
+## [Tabla de Contenidos](#verificador-de-paquetes-inteligente)
 
+- [Tabla de contenidos](#tabla-de-contenidos)
 - [Características Principales](#características-principales)
-- [Parámetros del Script](#parámetros-del-script)  
+- [Parámetros del Script](#parámetros-del-script)
 - [Uso Básico](#uso-básico)
 - [Modos de Visualización](#modos-de-visualización)
 - [Ejemplos Detallados](#ejemplos-detallados)
 - [Interpretando la Salida](#interpretando-la-salida)
-
+- [Casos de Uso Específicos](#casos-de-uso-específicos)
+- [Integración con Otros Scripts](#integración-con-otros-scripts)
+- [Solución de Problemas](#solución-de-problemas)
+- [Información Técnica](#información-técnica)
+- [Mejores Prácticas](#mejores-prácticas)
+- -[Scripts Relacionados](#scripts-relacionados)
 ---
 
-## Características Principales
+## [Características Principales](#verificador-de-paquetes-inteligente)
 
 ### Detección Completa de Paquetes
+
 - Encuentra automáticamente todos los UpgradeCaps en tu wallet
 - Lee información del último despliegue registrado
 - Identifica paquetes actualizables vs inmutables
 - Muestra estadísticas completas de tus despliegues
 
 ### Análisis Inteligente
+
 - Conecta UpgradeCaps con sus Package IDs correspondientes
 - Muestra versiones y estados de los paquetes
 - Proporciona sugerencias de próximos pasos
 - Detecta la red activa automáticamente
 
 ### Información Contextual
+
 - Integra datos del archivo `ultimo-despliegue.txt`
 - Proporciona enlaces a otros scripts relacionados
 - Muestra estadísticas resumidas
@@ -35,7 +46,7 @@ El script `check-packages.ps1` proporciona una vista completa de todos los paque
 
 ---
 
-## Parámetros del Script
+## [Parámetros del Script](#verificador-de-paquetes-inteligente)
 
 | Parámetro | Tipo | Descripción |
 |-----------|------|-------------|
@@ -45,15 +56,17 @@ El script `check-packages.ps1` proporciona una vista completa de todos los paque
 
 ---
 
-## Uso Básico
+## [Uso Básico](#verificador-de-paquetes-inteligente)
 
 ### Verificación Completa
+
 ```powershell
 .\.script\check-packages.ps1
 ```
 
 ### Salida Típica
-```
+
+```bash
 📦 VERIFICADOR INTELIGENTE DE PAQUETES SUI
 =========================================
 
@@ -86,37 +99,46 @@ El script `check-packages.ps1` proporciona una vista completa de todos los paque
 
 ---
 
-## Modos de Visualización
+## [Modos de Visualización](#verificador-de-paquetes-inteligente)
 
 ### Modo Básico (Default)
+
 ```powershell
 .\.script\check-packages.ps1
 ```
-Muestra información esencial de todos los paquetes
+
+> Muestra información esencial de todos los paquetes
 
 ### Modo Detallado
+
 ```powershell
 .\.script\check-packages.ps1 -Detallado
 ```
-Incluye información técnica adicional como fechas de creación y metadata
+
+>Incluye información técnica adicional como fechas de creación y metadata
 
 ### Solo Actualizables
+
 ```powershell
 .\.script\check-packages.ps1 -SoloActualizables
 ```
-Filtra para mostrar únicamente paquetes que pueden ser actualizados
+
+>Filtra para mostrar únicamente paquetes que pueden ser actualizados
 
 ### Red Específica
+
 ```powershell
 .\.script\check-packages.ps1 -Red mainnet
 ```
-Verifica paquetes en una red específica
+
+> Verifica paquetes en una red específica
 
 ---
 
-## Ejemplos Detallados
+## [Ejemplos Detallados](#verificador-de-paquetes-inteligente)
 
 ### Ejemplo 1: Primera Verificación
+
 ```powershell
 PS> .\.script\check-packages.ps1
 
@@ -137,6 +159,7 @@ PS> .\.script\check-packages.ps1
 ```
 
 ### Ejemplo 2: Múltiples Paquetes con Modo Detallado
+
 ```powershell
 PS> .\.script\check-packages.ps1 -Detallado
 
@@ -167,6 +190,7 @@ PS> .\.script\check-packages.ps1 -Detallado
 ```
 
 ### Ejemplo 3: Verificación en Mainnet
+
 ```powershell
 PS> .\.script\check-packages.ps1 -Red mainnet
 
@@ -192,21 +216,24 @@ PS> .\.script\check-packages.ps1 -Red mainnet
 
 ---
 
-## Interpretando la Salida
+## [Interpretando la Salida](#verificador-de-paquetes-inteligente)
 
 ### Secciones de la Salida
 
 #### Último Despliegue Registrado
+
 - **Fuente**: Archivo `ultimo-despliegue.txt`
 - **Información**: Package ID, UpgradeCap, fecha de despliegue
 - **Propósito**: Identificar tu despliegue más reciente
 
-#### Otros Paquetes Actualizables  
+#### Otros Paquetes Actualizables
+
 - **Fuente**: Búsqueda en objetos del wallet
 - **Información**: Todos los UpgradeCaps encontrados
 - **Propósito**: Ver todos los paquetes que puedes actualizar
 
 #### Estadísticas Resumidas
+
 - **Total paquetes actualizables**: Cuántos contratos puedes actualizar
 - **UpgradeCaps disponibles**: Cuántos UpgradeCaps tienes
 - **Red actual**: En qué red estás verificando
@@ -221,9 +248,10 @@ PS> .\.script\check-packages.ps1 -Red mainnet
 
 ---
 
-## Casos de Uso Específicos
+## [Casos de Uso Específicos](#verificador-de-paquetes-inteligente)
 
 ### Auditoría de Paquetes
+
 ```powershell
 # Ver todos los paquetes en todas las redes
 .\.script\check-packages.ps1 -Red testnet
@@ -232,18 +260,21 @@ PS> .\.script\check-packages.ps1 -Red mainnet
 ```
 
 ### Preparación para Actualización
+
 ```powershell
 # Ver solo paquetes actualizables
 .\.script\check-packages.ps1 -SoloActualizables
 ```
 
 ### Análisis Técnico Detallado
+
 ```powershell
 # Información completa con detalles técnicos
 .\.script\check-packages.ps1 -Detallado
 ```
 
 ### Verificación Cruzada de Redes
+
 ```powershell
 # Comparar despliegues entre redes
 .\.script\check-packages.ps1 -Red testnet -Detallado
@@ -252,7 +283,7 @@ PS> .\.script\check-packages.ps1 -Red mainnet
 
 ---
 
-## Integración con Otros Scripts
+## [Integración con Otros Scripts](#verificador-de-paquetes-inteligente)
 
 ### Flujo de Desarrollo Típico
 
@@ -273,6 +304,7 @@ PS> .\.script\check-packages.ps1 -Red mainnet
 ### Uso en Conjunto
 
 #### Con deploy.ps1
+
 ```powershell
 # Verificar antes de desplegar para evitar duplicados
 .\.script\check-packages.ps1
@@ -280,6 +312,7 @@ PS> .\.script\check-packages.ps1 -Red mainnet
 ```
 
 #### Con upgrade.ps1
+
 ```powershell
 # Identificar qué actualizar
 .\.script\check-packages.ps1 -SoloActualizables
@@ -287,6 +320,7 @@ PS> .\.script\check-packages.ps1 -Red mainnet
 ```
 
 #### Con calcular-costo-despliegue.ps1
+
 ```powershell
 # Verificar paquetes existentes antes de calcular costos
 .\.script\check-packages.ps1
@@ -295,16 +329,18 @@ PS> .\.script\check-packages.ps1 -Red mainnet
 
 ---
 
-## Solución de Problemas
+## [Solución de Problemas](#verificador-de-paquetes-inteligente)
 
 ### "No se encontraron paquetes desplegados"
 
 **Posibles causas:**
+
 - Estás en la red incorrecta
 - No has desplegado ningún contrato
 - Los contratos fueron desplegados desde otra dirección
 
 **Soluciones:**
+
 1. Verificar red activa: `sui client active-env`
 2. Cambiar de red: `sui client switch --env <red>`
 3. Verificar dirección activa: `sui client active-address`
@@ -313,16 +349,19 @@ PS> .\.script\check-packages.ps1 -Red mainnet
 ### "Error al obtener detalles"
 
 **Posibles causas:**
+
 - Problemas de conexión con la red
 - UpgradeCap inválido o eliminado
 - Permisos insuficientes
 
 **Soluciones:**
+
 1. Verificar conexión: `sui client objects`
 2. Usar modo básico en lugar de detallado
 3. Verificar manualmente: `sui client object <UpgradeCap-ID>`
 
 ### Comandos de Diagnóstico
+
 ```powershell
 # Verificar configuración básica
 sui client active-env
@@ -341,10 +380,11 @@ sui client envs
 
 ---
 
-## Información Técnica
+## [Información Técnica](#verificador-de-paquetes-inteligente)
 
 ### Estructura del Archivo ultimo-despliegue.txt
-```
+
+```bash
 Package ID: 0x8ddace66e376f03067016c51820d512fa1a8fa9e2e518ed0c842086cdb27ae91
 Upgrade Cap ID: 0x039aba13ae7fae8f7ad0537f5ede79c334fbcc40055b9c14b6db737472967ab0
 Red: testnet
@@ -354,13 +394,17 @@ Proyecto: to_do_day
 ```
 
 ### Detección de UpgradeCaps
+
 El script busca objetos que coincidan con el patrón:
-```
+
+```bash
 (0x[a-f0-9]+).*UpgradeCap
 ```
 
 ### Obtención de Package IDs
+
 Para cada UpgradeCap encontrado, el script ejecuta:
+
 ```powershell
 $capInfo = sui client object $upgradeCapId --json | ConvertFrom-Json
 $packageId = $capInfo.content.fields.package
@@ -368,15 +412,17 @@ $packageId = $capInfo.content.fields.package
 
 ---
 
-## Mejores Prácticas
+## [Mejores Prácticas](#verificador-de-paquetes-inteligente)
 
 ### Verificación Regular
+
 ```powershell
 # Ejecutar regularmente para mantener visibilidad
 .\.script\check-packages.ps1 -Detallado
 ```
 
 ### Antes de Actualizaciones
+
 ```powershell
 # Siempre verificar antes de actualizar
 .\.script\check-packages.ps1 -SoloActualizables
@@ -384,6 +430,7 @@ $packageId = $capInfo.content.fields.package
 ```
 
 ### Gestión Multi-Red
+
 ```powershell
 # Mantener inventario de todas las redes
 .\.script\check-packages.ps1 -Red testnet > testnet-packages.txt
@@ -391,18 +438,21 @@ $packageId = $capInfo.content.fields.package
 ```
 
 ### Documentación
+
 - Guarda las salidas del script para documentación
 - Usa modo detallado para registros importantes
 - Combina con screenshots para documentación visual
 
 ---
 
-## Scripts Relacionados
+## [Scripts Relacionados](#verificador-de-paquetes-inteligente)
 
 - **[🚀 deploy.ps1](deploy-script.md)** - Para desplegar nuevos contratos
-- **[🔄 upgrade.ps1](upgrade-script.md)** - Para actualizar contratos existentes  
+- **[🔄 upgrade.ps1](upgrade-script.md)** - Para actualizar contratos existentes
 - **[💰 calcular-costo-despliegue.ps1](cost-calculator-script.md)** - Para estimar costos
 
 ---
 
 ¡Con este script siempre tendrás visibilidad completa de tus paquetes Sui desplegados! 📦
+
+**Creado con ❤️ por el equipo de desarrollo de [Dc Studio]()**

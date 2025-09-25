@@ -1,39 +1,50 @@
-# 🚀 Script de Despliegue Inteligente
+🏠 [Readme](../../README.md) \ 📚 [Docs](../../docs/documentacion-detallada.md) \ 📕[Scripts](../script/deploy-script.md) \ **📖 deploy-script** 
+
+# Script de Despliegue Inteligente
 
 El script `deploy.ps1` es una herramienta completa para desplegar contratos inteligentes en la blockchain Sui de manera automatizada e inteligente.
 
-## 📋 Tabla de Contenidos
+## [Tabla de Contenidos](#script-de-despliegue-inteligente)
 
-- [🎯 Características Principales](#características-principales)
-- [🛠️ Parámetros del Script](#parámetros-del-script)
-- [🚀 Uso Básico](#uso-básico)
-- [🔧 Uso Avanzado](#uso-avanzado)
-- [📖 Ejemplos Detallados](#ejemplos-detallados)
-- [🐛 Solución de Problemas](#solución-de-problemas)
+- [Tabla de Contenidos](#tabla-de-contenidos)
+- [Características Principales](#características-principales)
+- [Parámetros del Script](#parámetros-del-script)
+- [Uso Básico](#uso-básico)
+- [Uso Avanzado](#uso-avanzado)
+- [Ejemplos Detallados](#ejemplos-detallados)
+- [Casos de Uso Específicos](#casos-de-uso-específicos)
+- [Información del Archivo](#información-del-archivo)
+- [Solución de Problemas](#solución-de-problemas)
+- [Mejores Prácticas](#mejores-prácticas)
+- [Scripts Relacionados](#scripts-relacionados)
+- [Listo para Desarrollar](#listo-para-desarrollar)
 
 ---
 
-## 🎯 Características Principales
+## [Características Principales](#script-de-despliegue-inteligente)
 
 ### ✅ **Detección Automática**
+
 - **Proyecto**: Detecta automáticamente el nombre del proyecto desde `Move.toml`
 - **Red Actual**: Identifica la red Sui activa (testnet, mainnet, devnet)
 - **Balance**: Verifica automáticamente el balance disponible
 - **Compilación**: Valida que el proyecto compile correctamente
 
 ### 🎨 **Interfaz Interactiva**
+
 - **Selección de Red**: Menú interactivo para elegir la red de despliegue
 - **Opciones de Despliegue**: Permite elegir entre contrato actualizable o inmutable
 - **Confirmaciones**: Solicita confirmación antes de operaciones críticas
 - **Feedback Visual**: Usa emojis y colores para mejor experiencia
 
 ### 📁 **Sistema de Archivos**
+
 - **Tracking de Despliegues**: Guarda información del último despliegue en `ultimo-despliegue.txt`
 - **Integración**: Los otros scripts pueden usar esta información automáticamente
 
 ---
 
-## 🛠️ Parámetros del Script
+## [Parámetros del Script](#script-de-despliegue-inteligente)
 
 | Parámetro | Tipo | Descripción | Requerido |
 |-----------|------|-------------|-----------|
@@ -44,14 +55,16 @@ El script `deploy.ps1` es una herramienta completa para desplegar contratos inte
 
 ---
 
-## 🚀 Uso Básico
+## [Uso Básico](#script-de-despliegue-inteligente)
 
 ### **Despliegue Automático Completo**
+
 ```powershell
 .\.script\deploy.ps1
 ```
 
 **¿Qué hace?**
+
 1. 🔍 Detecta tu proyecto y red actual
 2. 🎨 Te muestra un menú para seleccionar red
 3. 💰 Verifica tu balance
@@ -60,7 +73,8 @@ El script `deploy.ps1` es una herramienta completa para desplegar contratos inte
 6. 📄 Guarda la información en `ultimo-despliegue.txt`
 
 ### **Salida Típica:**
-```
+
+```bash
 🚀 SCRIPT INTELIGENTE DE DESPLIEGUE SUI
 =====================================
 
@@ -101,9 +115,10 @@ El script `deploy.ps1` es una herramienta completa para desplegar contratos inte
 
 ---
 
-## 🔧 Uso Avanzado
+## [Uso Avanzado](#script-de-despliegue-inteligente)
 
 ### **Especificar Red Directamente**
+
 ```powershell
 # Desplegar directamente en mainnet
 .\.script\deploy.ps1 -Red mainnet
@@ -113,6 +128,7 @@ El script `deploy.ps1` es una herramienta completa para desplegar contratos inte
 ```
 
 ### **Forzar Tipo de Despliegue**
+
 ```powershell
 # Forzar despliegue actualizable
 .\.script\deploy.ps1 -Actualizable
@@ -125,6 +141,7 @@ El script `deploy.ps1` es una herramienta completa para desplegar contratos inte
 ```
 
 ### **Gas Budget Personalizado**
+
 ```powershell
 # Usar más gas para contratos complejos
 .\.script\deploy.ps1 -GasBudget "200000000"
@@ -135,9 +152,10 @@ El script `deploy.ps1` es una herramienta completa para desplegar contratos inte
 
 ---
 
-## 📖 Ejemplos Detallados
+## [Ejemplos Detallados](#script-de-despliegue-inteligente)
 
 ### **Ejemplo 1: Primer Despliegue en Testnet**
+
 ```powershell
 PS> .\.script\deploy.ps1
 
@@ -149,7 +167,7 @@ PS> .\.script\deploy.ps1
 
 🔍 ¿En qué red quieres desplegar?
    1️⃣  Usar red actual (testnet)
-   2️⃣  testnet  
+   2️⃣  testnet
    3️⃣  mainnet
    4️⃣  devnet
 
@@ -171,13 +189,14 @@ PS> .\.script\deploy.ps1
 ```
 
 ### **Ejemplo 2: Despliegue en Mainnet con Configuración**
+
 ```powershell
 PS> .\.script\deploy.ps1 -Red mainnet -Actualizable -GasBudget "300000000"
 
 🚀 SCRIPT INTELIGENTE DE DESPLIEGUE SUI
 =====================================
 
-📦 Proyecto: empresa_system  
+📦 Proyecto: empresa_system
 🌐 Red actual: testnet
 🔄 Cambiando a mainnet...
 
@@ -196,43 +215,51 @@ PS> .\.script\deploy.ps1 -Red mainnet -Actualizable -GasBudget "300000000"
 
 ---
 
-## 🎯 Casos de Uso Específicos
+## [Casos de Uso Específicos](#script-de-despliegue-inteligente)
 
 ### **🆕 Desarrollador Principiante**
+
 ```powershell
 # Simplemente ejecutar sin parámetros
 .\.script\deploy.ps1
 ```
+
 > El script te guiará paso a paso con preguntas interactivas
 
 ### **👨‍💻 Desarrollador Experimentado**
+
 ```powershell
 # Despliegue rápido con parámetros
 .\.script\deploy.ps1 -Red testnet -Actualizable
 ```
+
 > Usa parámetros para acelerar el proceso
 
 ### **🏭 Producción en Mainnet**
+
 ```powershell
 # Despliegue seguro en producción
 .\.script\deploy.ps1 -Red mainnet -GasBudget "500000000"
 ```
+
 > Usa más gas para garantizar éxito en mainnet
 
 ### **🧪 Pruebas Rápidas**
+
 ```powershell
 # Contratos inmutables para pruebas
 .\.script\deploy.ps1 -Red devnet -Inmutable
 ```
+
 > Para pruebas que no requieren actualizaciones
 
 ---
 
-## 📊 Información del Archivo `ultimo-despliegue.txt`
+## [Información del Archivo](#script-de-despliegue-inteligente)
 
-El script guarda automáticamente información del despliegue:
+El script guarda en el archivo `ultimo-despliegue.txt` automáticamente la información del despliegue:
 
-```
+```bash
 Package ID: 0xabc123def456...
 Upgrade Cap ID: 0x789xyz012...
 Red: testnet
@@ -243,21 +270,24 @@ Gas usado: 85432100
 ```
 
 **Esta información es utilizada por:**
+
 - ✅ `upgrade.ps1` - Para detectar automáticamente qué actualizar
 - ✅ `check-packages.ps1` - Para mostrar el último despliegue  
 - ✅ `calcular-costo-despliegue.ps1` - Para comparar costos
 
 ---
 
-## 🐛 Solución de Problemas
+## [Solución de Problemas](#script-de-despliegue-inteligente)
 
 ### **❌ Error: "No se encuentra Move.toml"**
-```
+
+```bash
 Solución: Ejecuta el script desde el directorio del proyecto Move
 ```
 
 ### **❌ Error: "Balance insuficiente"**
-```
+
+```bash
 Soluciones:
 - Testnet: Usa el faucet https://faucet.sui.io/
 - Mainnet: Transfiere más SUI a tu wallet
@@ -265,7 +295,8 @@ Soluciones:
 ```
 
 ### **❌ Error: "Compilación fallida"**
-```
+
+```bash
 Soluciones:
 1. Revisa los errores en el código Move
 2. Ejecuta: sui move build
@@ -274,7 +305,8 @@ Soluciones:
 ```
 
 ### **❌ Error: "No se puede cambiar de red"**
-```
+
+```bash
 Soluciones:
 1. Verifica que la red existe: sui client envs
 2. Agrega la red si no existe:
@@ -282,6 +314,7 @@ Soluciones:
 ```
 
 ### **🔧 Comandos de Diagnóstico:**
+
 ```powershell
 # Verificar configuración
 sui client active-env
@@ -297,21 +330,24 @@ sui move build
 
 ---
 
-## 🎯 Mejores Prácticas
+## [Mejores Prácticas](#script-de-despliegue-inteligente)
 
 ### **🏗️ Para Desarrollo:**
+
 1. ✅ Usa **testnet** para desarrollo y pruebas
 2. ✅ Despliega como **actualizable** durante desarrollo
 3. ✅ Verifica el balance antes de desplegar
 4. ✅ Guarda el Package ID y UpgradeCap
 
 ### **🚀 Para Producción:**
+
 1. ✅ Prueba completamente en **testnet** primero
 2. ✅ Considera si necesitas **actualizaciones** futuras
 3. ✅ Usa **gas budget** generoso en mainnet
 4. ✅ Documenta el Package ID desplegado
 
 ### **💡 Consejos de Eficiencia:**
+
 1. ⚡ Usa parámetros para deployments repetitivos
 2. 📱 Mantén el archivo `ultimo-despliegue.txt` para integración
 3. 🔄 Combina con otros scripts para flujo completo
@@ -319,16 +355,20 @@ sui move build
 
 ---
 
-## 🔗 Scripts Relacionados
+## [Scripts Relacionados](#script-de-despliegue-inteligente)
 
 - **[🔄 upgrade.ps1](upgrade-script.md)** - Para actualizar contratos desplegados
-- **[📦 check-packages.ps1](check-packages-script.md)** - Para verificar paquetes existentes  
+- **[📦 check-packages.ps1](check-packages-script.md)** - Para verificar paquetes existentes
 - **[💰 calcular-costo-despliegue.ps1](cost-calculator-script.md)** - Para estimar costos
 
 ---
 
-## 🎉 ¡Listo para Desarrollar!
+## [Listo para Desarrollar](#script-de-despliegue-inteligente)
 
 Con este script puedes desplegar contratos en Sui de manera profesional y automatizada. El script se encarga de todos los detalles técnicos para que te concentres en desarrollar tu lógica de negocio.
 
-**¡Feliz desarrollo en Sui! 🚀******
+---
+
+**¡Feliz desarrollo en Sui! 🚀**
+
+**Creado con ❤️ por el equipo de desarrollo de [Dc Studio]()**

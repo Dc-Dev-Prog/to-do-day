@@ -1,29 +1,52 @@
+🏠[Readme](../../README.md) \ 📚[Docs](../../docs/documentacion-detallada.md) \ 📕[Certificación](../Certification/Sui%20Certification%20Day%20Code.md) \ 📖 **Sui Certification** 
+
+# Sui Certification Day Code - Documentación Completa
+
 ![banner](./imagenes/banner.jpg)
-# Sui Certification Day Code
+
+## [Tabla de Contenidos](#sui-certification-day-code---documentación-completa)
+
+- [Sui Certification Day Code - Documentación Completa](#sui-certification-day-code---documentación-completa)
+  - [Tabla de Contenidos](#tabla-de-contenidos)
+  - [Proyecto base](#proyecto-base)
+    - [Abriendo con Codespaces)](#abriendo-con-codespaces)
+  - [Configuración inicial para despliegue en testnet](#configuración-inicial-para-despliegue-en-testnet)
+  - [Fondeando una cuenta](#fondeando-una-cuenta)
+  - [Desplegando en la testnet](#desplegando-en-la-testnet)
+  - [Verificando nuestro paquete en Suiscan](#verificando-nuestro-paquete-en-suiscan)
+  - [Despliegue en mainnet](#despliegue-en-mainnet)
+    - [Cambiando de entorno](#cambiando-de-entorno)
+  - [Despliegue](#despliegue)
+  - [Creacion del Move Registry](#creacion-del-move-registry)
+    - [Importacion de la llave privada](#importacion-de-la-llave-privada)
+    - [Creacion del MVR](#creacion-del-mvr)
+
+## [Proyecto base](#sui-certification-day-code---documentación-completa)
 
 Sui es una plataforma de blockchain y contratos inteligentes de capa 1 diseñada para que la propiedad de activos digitales sea rápida, privada, segura y accesible.
 
 Move es un lenguaje de código abierto para escribir paquetes seguros para manipular objetos en blockchain. Permite bibliotecas, herramientas y comunidades de desarrolladores comunes en blockchains con modelos de datos y ejecución muy diferentes.
 
-## Proyecto base
-
 Puedes usar este repositorio como tu punto de despliegue de tu proyecto backend.
 
-### Abriendo con Codespaces
+### Abriendo con Codespaces)
 
-* Asegúrate de clonar este repositorio a tu cuenta usando el botón **`Fork`**.
-    
+- Asegúrate de clonar este repositorio a tu cuenta usando el botón **`Fork`**.
+
     ![fork](./imagenes/fork.png)
-    * Puedes renombrar el repositorio a lo que sea que se ajuste con tu proyecto.
-* Presiona el botón **`<> Code`** y luego haz click en la sección **`Codespaces`**
+
+    > Puedes renombrar el repositorio a lo que sea que se ajuste con tu proyecto.
+
+- Presiona el botón **`<> Code`** y luego haz click en la sección **`Codespaces`**
 
     ![codespaces](./imagenes/codespaces.png)
 
-* Por último, presiona **`Create codespace on master`**. Esto abrirá el proyecto en una interfaz gráfica de Visual Studio Code e instalará todas las herramientas necesarias para desarrollar con Move.
+- Por último, presiona **`Create codespace on master`**. Esto abrirá el proyecto en una interfaz gráfica de Visual Studio Code e instalará todas las herramientas necesarias para desarrollar con Move.
 
-## Configuración inicial para despliegue en testnet
+## [Configuración inicial para despliegue en testnet](#sui-certification-day-code---documentación-completa)
 
 Puedes hacer esto ejecutando los siguientes comandos en tu terminal:
+
 ```sh
 sui client
 ```
@@ -35,6 +58,7 @@ Config file ["<PATH-TO-FILE>/client.yaml"] doesn't exist, do you want to connect
 ```
 
 Presionamos y y luego Enter para continuar y obtendremos esto:
+
 ```sh
 Sui Full node server URL (Defaults to Sui Testnet if not specified) :
 ```
@@ -44,16 +68,17 @@ Puedes volver a presionar `Enter` en tu teclado para dejar la configuración por
 ```sh
 Select key scheme to generate keypair (0 for ed25519, 1 for secp256k1, 2 for secp256r1):
 ```
+
 Puedes seleccionar el que gustes, la opción por defecto es 0, así que escribe `0` en y presiona `Enter`. Una vez terminado deberías obtener algo similar a esto:
 
 ```sh
 Generated new keypair for address with scheme "ed25519" [0xb9c83a8b40d3263c9ba40d551514fbac1f8c12e98a4005a0dac072d3549c2442]
 Secret Recovery Phrase : [cap wheat many line human lazy few solid bored proud speed grocery]
 ```
+
 > :information_source: Tanto el `address` como la frase de recuperación que obtengas serán diferentes a las que mostramos aquí.
 
-
-## Fondeando una cuenta
+## [Fondeando una cuenta](#sui-certification-day-code---documentación-completa)
 
 Una vez conectado, el siguiente paso es **fondear tu cuenta**, es decir, asegurarte de que la dirección que estás utilizando tenga **tokens SUI** (aunque sean tokens de prueba) suficientes para cubrir las tarifas de las transacciones. Este proceso es esencial para poder desplegar paquetes, ejecutar funciones y validar tu lógica en cualquier red que estés utilizando.
 
@@ -68,11 +93,12 @@ Obtendrás algo similar a esto, probablemente en letras rojas:
 ```sh
 For testnet tokens, please use the Web UI: https://faucet.sui.io/?address=0x451ef911c5a1706d4833f89b75f6cb49c55a586821e9b7de6bd9d8b41dac2cda
 ```
-Puedes hacer click en esa URL, la cual te llevará al faucet de Sui, que es una aplicación que reparte tokens de prueba en las redes `testnet` y `devnet`, para que los desarrolladores puedan desplegar y probar sus paquetes Move.
+
+> Puedes hacer click en esa URL, la cual te llevará al faucet de Sui, que es una aplicación que reparte tokens de prueba en las redes `testnet` y `devnet`, para que los desarrolladores puedan desplegar y probar sus paquetes Move.
 
 ![faucet](./imagenes/testnetfaucet.png)
 
-Ya en el sitio, simplemente haz click en **Request Testnet SUI**. Con esto habremos terminado el proceso de fondeo. Puedes verificarlo en terminal
+> Ya en el sitio, simplemente haz click en **Request Testnet SUI**. Con esto habremos terminado el proceso de fondeo. Puedes verificarlo en terminal
 
 ```sh
 sui client balance
@@ -89,19 +115,21 @@ sui client balance
 
 > :information_source: El README distorsiona un poco este output.
 
-Puedes acceder al faucet directamente desde acá: https://faucet.sui.io/
+Puedes acceder al faucet directamente desde acá: [ttps://faucet.sui.io/](ttps://faucet.sui.io/)
 
-## Desplegando en la testnet
-La testnet es un entorno de pruebas creado para que los desarrolladores de la blockchain Sui experimenten e interactuen con sus paquetes antes de subirlos de manera oficial a la Mainnet, la red real. 
+## [Desplegando en la testnet](#sui-certification-day-code---documentación-completa)
+
+La testnet es un entorno de pruebas creado para que los desarrolladores de la blockchain Sui experimenten e interactuen con sus paquetes antes de subirlos de manera oficial a la Mainnet, la red real.
 
 Una vez recibidos los tokens de testnet mediante el faucet, desplegar a la testnet es muy sencillo, solo es necesario ejecutar el comando:
-```
+
+```bash
 sui client publish
 ```
 
 Lo que dará como resultado mucha informacion relacionada con la transaccion. Sin embargo, la información en la que nos vamos a centrar es la siguiente: 
 
-```
+```bash
 ╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ Object Changes                                                                                   │
 ├──────────────────────────────────────────────────────────────────────────────────────────────────┤
@@ -135,14 +163,14 @@ Lo que dará como resultado mucha informacion relacionada con la transaccion. Si
 
 Donde al final se muestra el PackageID, o ID del paquete (nuestro código). Es importante guardar este ID, ya que mediante su uso es como haremos interaccion con nuestro paquete.
 
-## Verificando nuestro paquete en Suiscan
+## [Verificando nuestro paquete en Suiscan](#sui-certification-day-code---documentación-completa)
+
 Suiscan es una plataforma de exploración y análisis. Sirve como una herramienta integral para que los desarrolladores naveguen y analicen datos on-chain, proporcionando información detallada sobre transacciones, direcciones, actividad de la red y diversos componentes del ecosistema.
 
 ![alt text](./imagenes/suiscan.png)
-https://suiscan.xyz/testnet/home
+[https://suiscan.xyz/testnet/home](https://suiscan.xyz/testnet/home)
 
-
-Para localizar nuestro paquete solo es necesario verificar que nos encontramos en testnet (que se ve en la parte superior derecha) e introduciremos en el buscador el ID del paquete que nos arrojo la terminal una vez finalizado el despliegue. 
+Para localizar nuestro paquete solo es necesario verificar que nos encontramos en testnet (que se ve en la parte superior derecha) e introduciremos en el buscador el ID del paquete que nos arrojo la terminal una vez finalizado el despliegue
 
 Posterior a eso, daremos click en la única opción que nos aparece:
 
@@ -152,8 +180,10 @@ Como resultado veremos la siguiente pestaña, donde veremos un resumen de las tr
 
 ![alt text](./imagenes/bloque.png)
 
-## Despliegue en mainnet 
+## [Despliegue en mainnet](#sui-certification-day-code---documentación-completa)
+
 ### Cambiando de entorno
+
 El primer paso para el despligue en mainnet es especificar la red en la que ahora queremos trabajar, para ello es necesario ejecutar los siguientes comandos:
 
 ```sh
@@ -161,29 +191,34 @@ sui client new-env --alias mainnet --rpc https://fullnode.mainnet.sui.io:443
 ```
 
 Ahora, necesitamos cambiarnos a este ambiente. Hazlo de la siguiente manera:
+
 ```sh
-sui client switch --env mainnet 
+sui client switch --env mainnet
 ```
 
 Puedes consultar tu dirección activa usando [Esta es la address que debes compartir en el registro de solicitud de tokens]:
+
 ```sh
 sui client active-address
 ```
 
 Y tu balance usando:
+
 ```sh
 sui client balance
 ```
 
-## Despliegue
+## [Despliegue](#sui-certification-day-code---documentación-completa)
+
 De igual manera que en el despliegue en testnet, solo es necesario ejecutar el comando 
 
-```
+```bash
 sui client publish
 ```
-Lo que dara como resultado, entre otras cosas:
 
-```
+> Lo que dara como resultado, entre otras cosas:
+
+```bash
 │ Published Objects:                                                                               │
 │  ┌──                                                                                             │
 │  │ PackageID: 0x41c0712233a64af3b69dd5f2a557b3a05f4dabdaba0300880e130d59381be03f                 │
@@ -192,28 +227,34 @@ Lo que dara como resultado, entre otras cosas:
 │  │ Modules: empresa                                                                              │
 │  └──                                                                                             │
 ```
+
 Puedes revisar tu paquete mediante el PackageID en suiscan para verificar que el codigo es el mismo al que desarrollaste, ver detalles del despliegue, entre otras cosas.
 
-## Creacion del Move Registry
+## [Creacion del Move Registry](#sui-certification-day-code---documentación-completa)
+
 ### Importacion de la llave privada
+
 En este paso es necesario exportar la llave privada del address utilizado para el despliegue del paquete en mainnet, suena complejo, pero en realidad es bastante sencillo. El primer paso apra lograrlo correr el comando:
 
-```
+```bash
 sui keytool export --key-identity <Inserta tu address aqui>
 ```
-Recuerda que puedes consultar tu address con:
-```
+
+>Recuerda que puedes consultar tu address con:
+
+```bash
 sui client active-address
 ```
 
 Por ejemplo:
 
-```
+```bash
 sui keytool export --key-identity 0xfdfb28de3b66e3d21922ed3a1f13cb99b5c7d848264fab94358d17e76647b6a0
 ```
 
 lo que dará como resultado la siguiente informacion:
-```
+
+```bash
 ╭────────────────────┬────────────────────────────────────────────────────────────────────────────────────────────╮
 │ exportedPrivateKey │  suiprivkey1qz72l.......                                                                   │
 │ key                │ ╭─────────────────┬──────────────────────────────────────────────────────────────────────╮ │
@@ -229,11 +270,11 @@ lo que dará como resultado la siguiente informacion:
 
 Vamos a copiar todo lo que aparece en la primera linea: suiprivkey1qz72l...
 
-Posteriormente, crearemos una nueva cuenta en la Wallet de Slush, si aun no tienes la tuya puedes acceder desde el navegador o instalando la extencion, desde el siguiente enlace: https://slush.app/
+Posteriormente, crearemos una nueva cuenta en la Wallet de Slush, si aun no tienes la tuya puedes acceder desde el navegador o instalando la extencion, desde el siguiente enlace: [https://slush.app/](https://slush.app/)
 
 ![alt text](./imagenes/slush.png)
 
-Una vez en el apartado de agregar cuenta, seleccionaremos la opcion Import Private Key (importar llave privada), donde pegaremos la informacion copiada de la terminal. 
+Una vez en el apartado de agregar cuenta, seleccionaremos la opcion Import Private Key (importar llave privada), donde pegaremos la informacion copiada de la terminal
 
 ![alt text](./imagenes/import.png)
 
@@ -242,11 +283,12 @@ Y listo!!!, ahora deberia aparecer tu direccion de la siguiente manera:
 ![alt text](./imagenes/imported.png)
 
 ### Creacion del MVR
-Abriremos el siguiente enlace, lo que nos direccionara a la pagina para la creacion del MVR: https://www.moveregistry.com/
+
+Abriremos el siguiente enlace, lo que nos direccionara a la pagina para la creacion del MVR: [https://www.moveregistry.com](https://www.moveregistry.com)
+
 ![alt text](./imagenes/mvr.png)
 
 En la parte superior izquierda vemos la opcion que dice "Connect", donde daremos click para vincular nuestra Wallet de Slush con MVR, **En caso de tener mas de dos direcciones, verifica que sea la misma en la que desplegaste tu proyecto en mainnet**. Finalmente, es necesario presionar el boton Approve.
-
 
 Una vez vinculada la Wallet de Slush, se nos habilitaran dos opciones. De momento, daremos click donde dice **My Packages**, despues, en el buscador que dice **Select one**, donde seleccionaremos la unica opcion que aparece  **Public Name**.
 
@@ -256,7 +298,7 @@ Ahora daremos click en  **Add package**
 
 ![alt text](./imagenes/create.png)
 
-Lo que nos abrira el siguiente formulario donde debemos de poner de manera obligatoria el nombre. De igual manera, es recomendable llenar la segunda casilla con una breve descripcion del proyecto, todas las demas secciones son opcionales. 
+Lo que nos abrira el siguiente formulario donde debemos de poner de manera obligatoria el nombre. De igual manera, es recomendable llenar la segunda casilla con una breve descripcion del proyecto, todas las demas secciones son opcionales
 
 ![alt text](./imagenes/package-details.png)
 
@@ -292,8 +334,12 @@ Y listo!, eso es todo. Puedes corrobarar la creacion de tu MVR en el buscador de
 
 ![alt text](./imagenes/image.png)
 
-Lo que nos llevara a una pagina similar a esta: https://www.moveregistry.com/package/@pkg/mi-empresa, que es similar a la que debes de compartir en el formulario de entrega de proyecto.
+Lo que nos llevara a una pagina similar a esta: `https://www.moveregistry.com/package/@pkg/mi-empresa`, que es similar a la que debes de compartir en el formulario de entrega de proyecto
 
 ![alt text](./imagenes/image-1.png)
 
-> Este repositorio fue creado con base al sui-starter-kit de ZinHunter: https://github.com/WayLearnLatam/sui-starter-kit
+> Este repositorio fue creado con base al sui-starter-kit de ZinHunter: [https://github.com/WayLearnLatam/sui-starter-kit](https://github.com/WayLearnLatam/sui-starter-kit)
+
+---
+
+Creado con ❤️ por el equipo de desarrollo de [Dc Studio]()

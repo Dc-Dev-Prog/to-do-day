@@ -1,4 +1,6 @@
-# 🚀 To-Do-Day - Proyecto Sui con Move
+🏠 **Inicio**
+
+# To-Do-Day - Proyecto Sui con Move
 
 [![Sui](https://img.shields.io/badge/Sui-4285f4?style=for-the-badge&logo=sui&logoColor=white)](https://sui.io/)
 [![Move](https://img.shields.io/badge/Move-000000?style=for-the-badge&logo=move&logoColor=white)](https://move-language.github.io/move/)
@@ -6,30 +8,32 @@
 
 Un proyecto completo de desarrollo en Sui utilizando Move como lenguaje de contratos inteligentes, con scripts de automatización avanzados en PowerShell.
 
-## 📋 Tabla de Contenidos
+## [Tabla de Contenidos](#to-do-day---proyecto-sui-con-move)
 
-- [🎯 Descripción del Proyecto](#descripción-del-proyecto)
-- [🛠️ Scripts de Automatización](#scripts-de-automatización)
-- [🚀 Inicio Rápido](#inicio-rápido)
-- [📖 Documentación Detallada](#documentación-detallada)
-- [🔧 Configuración](#configuración)
-- [📊 Estado del Proyecto](#estado-del-proyecto)
-- [🤝 Contribuir](#contribuir)
-- [📞 Soporte](#soporte)
-- [📄 Licencia](#licencia)
+- [Tabla de contenidos](#tabla-de-contenidos)
+- [Descripción del Proyecto](#descripción-del-proyecto)
+- [Scripts de Automatización](#scripts-de-automatización)
+- [Inicio Rápido](#inicio-rápido)
+- [Documentación Detallada](#documentación-detallada)
+- [Configuración](#configuración)
+- [Estado del Proyecto](#estado-del-proyecto)
+- [Contribuir](#contribuir)
+- [Soporte](#soporte)
+- [Licencia](#licencia)
+- [Próximos Pasos](#próximos-pasos)
 
 ---
 
-## 🎯 Descripción del Proyecto
+## [Descripción del Proyecto](#to-do-day---proyecto-sui-con-move)
 
 **To-Do-Day** es un sistema de gestión empresarial desarrollado en la blockchain Sui, que permite:
 
-- 📊 **Gestión de Empresas**: Crear y administrar información empresarial
-- 👥 **Administración de Clientes**: Sistema completo de clientes con descuentos
-- 🎯 **Sistema de Descuentos**: Niveles de descuento basados en tier de cliente
-- 🔄 **Contratos Actualizables**: Soporte para actualizaciones sin perder estado
+- **Gestión de Empresas**: Crear y administrar información empresarial
+- **Administración de Clientes**: Sistema completo de clientes con descuentos
+- **Sistema de Descuentos**: Niveles de descuento basados en tier de cliente
+- **Contratos Actualizables**: Soporte para actualizaciones sin perder estado
 
-### 🏗️ Arquitectura del Contrato
+### Arquitectura del Contrato
 
 ```move
 // Estructura principal de empresa
@@ -44,100 +48,95 @@ struct Empresa {
 
 ---
 
-## 🛠️ Scripts de Automatización
+## [Scripts de Automatización](#to-do-day---proyecto-sui-con-move)
 
 Hemos desarrollado un conjunto completo de scripts PowerShell para automatizar todo el ciclo de desarrollo en Sui:
 
-### 📁 Directorio `.script/`
+### Directorio `.script/`
 
 | Script | Descripción | Documentación |
 |--------|-------------|---------------|
-| 🚀 `deploy.ps1` | **Script Inteligente de Despliegue** - Despliega contratos con detección automática de red y opciones actualizables | [📖 Ver Documentación](docs/deploy-script.md) |
-| 🔄 `upgrade.ps1` | **Script Inteligente de Actualización** - Actualiza contratos existentes con detección automática de UpgradeCaps | [📖 Ver Documentación](docs/upgrade-script.md) |
-| 📦 `check-packages.ps1` | **Verificador de Paquetes** - Analiza y muestra todos los paquetes desplegados con sus capabilities | [📖 Ver Documentación](docs/check-packages-script.md) |
-| 💰 `calcular-costo-despliegue.ps1` | **Calculadora de Costos** - Estima costos de despliegue y actualización con conversión a USD | [📖 Ver Documentación](docs/cost-calculator-script.md) |
+| `deploy.ps1` | **Script Inteligente de Despliegue** - Despliega contratos con detección automática de red y opciones actualizables | [📖 Ver Documentación](docs/deploy-script.md) |
+| `upgrade.ps1` | **Script Inteligente de Actualización** - Actualiza contratos existentes con detección automática de UpgradeCaps | [📖 Ver Documentación](docs/upgrade-script.md) |
+| `check-packages.ps1` | **Verificador de Paquetes** - Analiza y muestra todos los paquetes desplegados con sus capabilities | [📖 Ver Documentación](docs/check-packages-script.md) |
+| `calcular-costo-despliegue.ps1` | **Calculadora de Costos** - Estima costos de despliegue y actualización con conversión a USD | [📖 Ver Documentación](docs/cost-calculator-script.md) |
 
 ---
 
-## 🚀 Inicio Rápido
+## [Inicio Rápido](#to-do-day---proyecto-sui-con-move)
 
-### 1️⃣ **Verificar Estado Actual**
+### **Verificar Estado Actual**
+
 ```powershell
 .\.script\check-packages.ps1
 ```
-> 📋 Muestra todos tus paquetes desplegados y sus UpgradeCaps
 
-### 2️⃣ **Calcular Costos**
+> Muestra todos tus paquetes desplegados y sus UpgradeCaps
+
+### **Calcular Costos**
+
 ```powershell
 .\.script\calcular-costo-despliegue.ps1 ambos
 ```
-> 💰 Calcula costos de despliegue y actualización
 
-### 3️⃣ **Desplegar Nuevo Contrato**
+> Calcula costos de despliegue y actualización
+
+### **Desplegar Nuevo Contrato**
+
 ```powershell
 .\.script\deploy.ps1
 ```
-> 🚀 Despliega tu contrato con opciones interactivas
 
-### 4️⃣ **Actualizar Contrato Existente**
+> Despliega tu contrato con opciones interactivas
+
+### **Actualizar Contrato Existente**
+
 ```powershell
 .\.script\upgrade.ps1
 ```
-> 🔄 Actualiza tu contrato manteniendo el mismo Package ID
+
+> Actualiza tu contrato manteniendo el mismo Package ID
 
 ---
 
-## 📖 Documentación Detallada
+## [Documentación Detallada](#to-do-day---proyecto-sui-con-move)
 
-### � Documentación Oficial
+**[Ver Documentación Completa](docs/documentacion-detallada.md)** - Centro de documentación organizada por categorías
 
-- **[🏆 Sui Certification Day Code](docs/Sui%20Certification%20Day%20Code.md)** - Documentación oficial de certificación con guías paso a paso para el desarrollo en Sui y Move
+### Acceso Rápido por Categoría
 
-### �📚 Guías Completas por Script
+#### Certificación y Guías Oficiales
 
-- **[🚀 Script de Despliegue](docs/deploy-script.md)**
-  - Configuración de red automática
-  - Opciones de despliegue actualizable vs inmutable
-  - Verificación de balance y compilación
-  - Ejemplos de uso avanzado
+- **[Sui Certification](docs/Certification/Sui%20Certification%20Day%20Code.md)** - Documentación oficial con capturas paso a paso
 
-- **[🔄 Script de Actualización](docs/upgrade-script.md)**
-  - Detección automática de UpgradeCaps
-  - Selección inteligente de paquetes
-  - Proceso de actualización paso a paso
-  - Manejo de errores y troubleshooting
+#### Scripts de Automatización
 
-- **[📦 Verificador de Paquetes](docs/check-packages-script.md)**
-  - Análisis completo de paquetes desplegados
-  - Visualización de UpgradeCaps disponibles
-  - Estadísticas y métricas
-  - Modos de visualización
+- **[Deploy Script](docs/script/deploy-script.md)** - Despliegue inteligente de contratos
+- **[Upgrade Script](docs/script/upgrade-script.md)** - Actualizaciones sin perder estado  
+- **[Check Packages](docs/script/check-packages-script.md)** - Verificador de paquetes y UpgradeCaps
+- **[Cost Calculator](docs/script/cost-calculator-script.md)** - Calculadora de costos SUI/USD
 
-- **[💰 Calculadora de Costos](docs/cost-calculator-script.md)**
-  - Estimación de costos en SUI y USD
-  - Diferentes modos de cálculo
-  - Verificación de balance
-  - Planificación financiera
+#### Casos de Uso Prácticos
 
-### 📚 Casos de Uso Específicos
+- **[Primer Despliegue](docs/casos-uso/primer-despliegue.md)** - Guía completa para principiantes ✅
 
-- **[🆕 Primer Despliegue](docs/casos-uso/primer-despliegue.md)** - Guía para principiantes ✅
-- **🔄 Actualización de Contratos** - Flujo de actualización 🚧 *En desarrollo*
-- **🌐 Cambio de Redes** - Testnet, Mainnet, Devnet 🚧 *En desarrollo*
-- **🐛 Solución de Problemas** - Errores comunes 🚧 *En desarrollo*
+#### � Documentos del Proyecto
+
+- **[Contribuir](docs/CONTRIBUTING.md)** - Guía de contribución
+- **[Código de Conducta](docs/CODE_OF_CONDUCT.md)** - Normas de la comunidad
 
 ---
 
-## 🔧 Configuración
+## [Configuración](#to-do-day---proyecto-sui-con-move)
 
-### 📋 Requisitos Previos
+### Requisitos Previos
 
 - ✅ **Sui CLI** v1.57.0+
 - ✅ **PowerShell** 7.0+
 - ✅ **Move** Compiler
 - ✅ **Git** (opcional)
 
-### ⚙️ Configuración Inicial
+### Configuración Inicial
 
 ```powershell
 # 1. Verificar instalación de Sui
@@ -153,29 +152,29 @@ sui client active-env
 .\.script\check-packages.ps1 -Detallado
 ```
 
-### 🌐 Configuración de Redes
+### Configuración de Redes
 
 | Red | Propósito | Costo Estimado |
 |-----|-----------|----------------|
-| 🧪 **testnet** | Desarrollo y pruebas | ~0.01 SUI |
-| 🌐 **mainnet** | Producción | ~0.39 SUI |
-| 🔧 **devnet** | Desarrollo local | Gratuito |
+| **testnet** | Desarrollo y pruebas | ~0.01 SUI |
+| **mainnet** | Producción | ~0.39 SUI |
+| **devnet** | Desarrollo local | Gratuito |
 
 ---
 
-## 📊 Estado del Proyecto
+## [Estado del Proyecto](#to-do-day---proyecto-sui-con-move)
 
-### 📈 Métricas de Desarrollo
+### Métricas de Desarrollo
 
-- 🎯 **Scripts Implementados**: 4/4 (100%)
-- 🔧 **Funcionalidad**: Completa con detección automática
-- 🎨 **UX**: Interface interactiva con emojis y colores
-- 📱 **Compatibilidad**: PowerShell 7.0+ en Windows
-- 🔒 **Seguridad**: Validaciones y confirmaciones incluidas
-- 📄 **Licencia**: MIT License implementada
-- 🛡️ **Código de Conducta**: Políticas de comunidad establecidas
+- **Scripts Implementados**: 4/4 (100%)
+- **Funcionalidad**: Completa con detección automática
+- **UX**: Interface interactiva con emojis y colores
+- **Compatibilidad**: PowerShell 7.0+ en Windows
+- **Seguridad**: Validaciones y confirmaciones incluidas
+- **Licencia**: MIT License implementada
+- **Código de Conducta**: Políticas de comunidad establecidas
 
-### 🎉 Funcionalidades Destacadas
+### Funcionalidades Destacadas
 
 - ✅ **Detección Automática** de UpgradeCaps y Package IDs
 - ✅ **Selección Interactiva** de redes y opciones
@@ -185,7 +184,7 @@ sui client active-env
 - ✅ **Manejo Robusto de Errores** con mensajes claros
 - ✅ **Documentación Completa** con ejemplos
 
-### 🏆 Flujo de Trabajo Optimizado
+### Flujo de Trabajo Optimizado
 
 ```mermaid
 graph TD
@@ -200,7 +199,7 @@ graph TD
 
 ---
 
-## 🤝 Contribuir
+## [Contribuir](#to-do-day---proyecto-sui-con-move)
 
 ¡Las contribuciones son bienvenidas! Por favor lee nuestro [Código de Conducta](CODE_OF_CONDUCT.md) antes de participar.
 
@@ -212,48 +211,47 @@ graph TD
 4. 📤 **Push** al branch (`git push origin feature/AmazingFeature`)
 5. 🔀 **Abre** un Pull Request
 
-### 🛡️ Código de Conducta
+### Código de Conducta
 
 Este proyecto adhiere al [Código de Conducta](CODE_OF_CONDUCT.md). Al participar, se espera que mantengas este código. Por favor reporta comportamiento inaceptable al equipo del proyecto.
 
-### 🎯 Tipos de Contribuciones
+### Tipos de Contribuciones
 
-- 🐛 **Reportar bugs** y problemas
-- 💡 **Sugerir nuevas funcionalidades**
-- 📝 **Mejorar documentación**
-- 🔧 **Contribuir código** y mejoras
-- 🧪 **Probar** en diferentes entornos
-
----
-
-## 📞 Soporte
-
-- 📖 **Documentación**: Ver carpeta `docs/`
-- 🐛 **Issues**: [Reportar problemas](https://github.com/Dc-Dev-Prog/to-do-day/issues)
-- 💬 **Discusiones**: [Comunidad](https://github.com/Dc-Dev-Prog/to-do-day/discussions)
-- 📧 **Email**: [Contacto directo](mailto:dcdevtk@gmail.com)
+- **Reportar bugs** y problemas
+- **Sugerir nuevas funcionalidades**
+- **Mejorar documentación**
+- **Contribuir código** y mejoras
+- **Probar** en diferentes entornos
 
 ---
 
-## 📄 Licencia
+## [Soporte](#to-do-day---proyecto-sui-con-move)
+
+- **Documentación**: Ver carpeta `docs/`
+- **Contribuir**: Lee nuestra [Guía de Contribución](./docs/CONTRIBUTING.md)
+- **Reportar Bugs**: [Usar plantilla de bug report](https://github.com/Dc-Dev-Prog/to-do-day/issues/new?template=bug_report.md)
+- **Solicitar Features**: [Usar plantilla de feature request](https://github.com/Dc-Dev-Prog/to-do-day/issues/new?template=feature_request.md)
+- **Hacer Preguntas**: [Usar plantilla de pregunta](https://github.com/Dc-Dev-Prog/to-do-day/issues/new?template=question.md)
+- **Discusiones**: [Comunidad](https://github.com/Dc-Dev-Prog/to-do-day/discussions)
+- **Email**: [Contacto directo](mailto:dcdevtk@gmail.com)
+
+---
+
+## [Licencia](#to-do-day---proyecto-sui-con-move)
 
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
 
 ---
 
-## 🎯 Próximos Pasos
+## [Próximos Pasos](#to-do-day---proyecto-sui-con-move)
 
-1. 📖 **Lee la documentación** específica del script que necesites
-2. 🚀 **Ejecuta el flujo** de verificación → cálculo → despliegue/actualización  
-3. 💡 **Experimenta** con diferentes opciones y redes
-4. 🎉 **¡Desarrolla en Sui!** con confianza usando nuestros scripts
+1. **Lee la documentación** específica del script que necesites
+2. **Ejecuta el flujo** de verificación → cálculo → despliegue/actualización
+3. **Experimenta** con diferentes opciones y redes
+4. **¡Desarrolla en Sui!** con confianza usando nuestros scripts
 
 ---
 
-<div align="center">
-
 **🚀 ¡Feliz desarrollo en Sui con Move! 🎉**
 
-*Creado con ❤️ por el equipo de desarrollo*
-
-</div>
+**Creado con ❤️ por el equipo de desarrollo de [Dc Studio]()**

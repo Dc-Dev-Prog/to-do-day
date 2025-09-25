@@ -1,8 +1,24 @@
-# 🆕 Guía de Primer Despliegue
+📚[Readme](../../README.md) \ 📚[Docs](../../docs/documentacion-detallada.md) \ 📕[Caso de uso](../casos-uso/primer-despliegue.md) \ **📖 Guía de Primer Despliegue**
+
+# Guía de Primer Despliegue
 
 Esta guía te llevará paso a paso a través de tu primer despliegue en Sui, desde la configuración inicial hasta tener tu contrato funcionando.
 
-## 📋 Antes de Comenzar
+## Tabla de Contenidos
+
+- [Antes de Comenzar](#antes-de-comenzar)
+- [Flujo de Primer Despliegue](#flujo-de-primer-despliegue)
+- [Ejemplo Completo: Primer Despliegue](#ejemplo-completo-primer-despliegue)
+- [Decisiones Importantes en el Primer Despliegue](#decisiones-importantes-en-el-primer-despliegue)
+- [Consejos para Principiantes](#consejos-para-principiantes)
+- [Problemas Comunes y Soluciones](#problemas-comunes-y-soluciones)
+- [Recursos Adicionales](#recursos-adicionales)
+- [Próximos Pasos](#próximos-pasos)
+- [Checklist de Primer Despliegue Exitoso](#checklist-de-primer-despliegue-exitoso)
+
+---
+
+## [Antes de Comenzar](#guía-de-primer-despliegue)
 
 ### ✅ Checklist de Preparación
 
@@ -27,7 +43,7 @@ sui move build
 
 ---
 
-## 🚀 Flujo de Primer Despliegue
+## [Flujo de Primer Despliegue](#guía-de-primer-despliegue)
 
 ### Paso 1: Verificar Estado Actual
 
@@ -36,7 +52,8 @@ sui move build
 ```
 
 **Si es tu primer despliegue, verás:**
-```
+
+```bash
 ❌ NO SE ENCONTRARON PAQUETES DESPLEGADOS
    💡 Consejos:
       • Verifica que estés en la red correcta
@@ -51,7 +68,8 @@ sui move build
 ```
 
 **Para testnet (recomendado para primer despliegue):**
-```
+
+```md
 💰 Costo en SUI: ~0.01 SUI
 💵 Costo en USD: ~$0.017
 ✅ Balance suficiente para despliegue
@@ -71,7 +89,7 @@ sui move build
 
 ---
 
-## 📱 Ejemplo Completo: Primer Despliegue
+## [Ejemplo Completo: Primer Despliegue](#guía-de-primer-despliegue)
 
 ### Sesión Típica de Primer Despliegue
 
@@ -150,17 +168,19 @@ PS C:\mi-proyecto> .\.script\deploy.ps1
 
 ---
 
-## 🎯 Decisiones Importantes en el Primer Despliegue
+## [Decisiones Importantes en el Primer Despliegue](#guía-de-primer-despliegue)
 
 ### Red de Despliegue
 
 #### 🧪 Testnet (Recomendado para principiantes)
+
 - ✅ **Costos mínimos** (~$0.02 USD)
 - ✅ **SUI gratuito** desde faucet
 - ✅ **Perfecto para aprender**
 - ✅ **Sin riesgo financiero**
 
 #### 🌐 Mainnet (Solo cuando estés listo)
+
 - ⚠️ **Costos reales** (~$0.64 USD)
 - ⚠️ **Requiere SUI real**
 - ⚠️ **Para producción**
@@ -169,12 +189,14 @@ PS C:\mi-proyecto> .\.script\deploy.ps1
 ### Tipo de Contrato
 
 #### 🔄 Actualizable (Recomendado)
+
 - ✅ **Permite actualizaciones** futuras
 - ✅ **Mantiene el Package ID** constante
 - ✅ **Flexible** para desarrollo iterativo
 - ⚠️ **Ligeramente más costoso**
 
 #### 🔒 Inmutable
+
 - ✅ **Más seguro** (no se puede cambiar)
 - ✅ **Ligeramente más barato**
 - ❌ **No se puede actualizar** nunca
@@ -182,27 +204,33 @@ PS C:\mi-proyecto> .\.script\deploy.ps1
 
 ---
 
-## 💡 Consejos para Principiantes
+## [Consejos para Principiantes](#guía-de-primer-despliegue)
 
 ### Antes del Despliegue
 
 1. **Compila Localmente**
+
    ```powershell
    sui move build
    ```
+
    > Asegúrate de que no hay errores
 
 2. **Verifica tu Wallet**
+
    ```powershell
    sui client active-address
    sui client balance
    ```
+
    > Confirma que tienes SUI suficiente
 
 3. **Usa Testnet Primero**
+
    ```powershell
    sui client switch --env testnet
    ```
+
    > Siempre prueba en testnet antes de mainnet
 
 ### Durante el Despliegue
@@ -214,29 +242,32 @@ PS C:\mi-proyecto> .\.script\deploy.ps1
 ### Después del Despliegue
 
 1. **Verifica el Resultado**
+
    ```powershell
    .\.script\check-packages.ps1
    ```
 
 2. **Prueba una Función**
+
    ```powershell
    sui client call --package <TU-PACKAGE-ID> --module <MODULO> --function <FUNCION>
    ```
 
 3. **Explora en Suiscan**
-   > Ve a https://suiscan.xyz/testnet/home y busca tu Package ID
 
----
+   > Ve a [Suiscan](https://suiscan.xyz/testnet/home) y busca tu Package ID
 
-## 🐛 Problemas Comunes y Soluciones
+## [Problemas Comunes y Soluciones](#guía-de-primer-despliegue)
 
 ### "No se encuentra Move.toml"
+
 ```powershell
 # Asegúrate de estar en el directorio del proyecto
 cd C:\ruta\a\tu\proyecto
 ```
 
 ### "Balance insuficiente"
+
 ```powershell
 # Para testnet, usa el faucet
 sui client faucet
@@ -244,6 +275,7 @@ sui client faucet
 ```
 
 ### "Error de compilación"
+
 ```powershell
 # Revisa los errores específicos
 sui move build
@@ -251,6 +283,7 @@ sui move build
 ```
 
 ### "Red incorrecta"
+
 ```powershell
 # Cambia a testnet
 sui client switch --env testnet
@@ -258,21 +291,23 @@ sui client switch --env testnet
 
 ---
 
-## 📚 Recursos Adicionales
+## [Recursos Adicionales](#guía-de-primer-despliegue)
 
 ### Documentación
-- [📖 Script de Despliegue](../deploy-script.md) - Guía completa del script
-- [💰 Calculadora de Costos](../cost-calculator-script.md) - Entender los costos
+
+- [📖 Script de Despliegue](../script/deploy-script.md) - Guía completa del script
+- [💰 Calculadora de Costos](../script/cost-calculator-script.md) - Entender los costos
 - [� README Principal](../../README.md) - Documentación completa del proyecto
 
 ### Enlaces Útiles
-- **Faucet Testnet**: https://faucet.sui.io/
-- **Sui Explorer**: https://suiscan.xyz/
-- **Documentación Sui**: https://docs.sui.io/
+
+- [Faucet Testnet](https://faucet.sui.io/)
+- [Sui Explorer](https://suiscan.xyz/)
+- [Documentación Sui](https://docs.sui.io/)
 
 ---
 
-## 🎯 Próximos Pasos
+## [Próximos Pasos](#guía-de-primer-despliegue)
 
 Una vez completado tu primer despliegue:
 
@@ -283,7 +318,7 @@ Una vez completado tu primer despliegue:
 
 ---
 
-## ✅ Checklist de Primer Despliegue Exitoso
+## [Checklist de Primer Despliegue Exitoso](#guía-de-primer-despliegue)
 
 - [ ] Proyecto compilando sin errores
 - [ ] Script ejecutado en testnet
@@ -292,6 +327,11 @@ Una vez completado tu primer despliegue:
 - [ ] Contrato verificado en Suiscan
 - [ ] Función de prueba ejecutada exitosamente
 
-**🎉 ¡Felicitaciones por tu primer despliegue en Sui!**
+>Ahora eres oficialmente un desarrollador de Sui. El próximo paso es >
+explorar las funcionalidades avanzadas y considerar el despliegue en >
+mainnet cuando tu proyecto esté listo para usuarios reales.
 
-Ahora eres oficialmente un desarrollador de Sui. El próximo paso es explorar las funcionalidades avanzadas y considerar el despliegue en mainnet cuando tu proyecto esté listo para usuarios reales.
+---
+ **🎉 ¡Felicitaciones por tu primer despliegue en Sui!**
+
+**Creado con ❤️ por el equipo de desarrollo de [Dc Studio]()**

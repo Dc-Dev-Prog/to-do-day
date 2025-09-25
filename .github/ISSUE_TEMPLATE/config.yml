@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Community Discussions
+    url: https://github.com/Dc-Dev-Prog/to-do-day/discussions
+    about: Para preguntas generales, ideas, y discusiones de la comunidad
+  - name: � Sui Documentation
+    url: https://docs.sui.io
+    about: Documentación oficial de Sui para referencias técnicas
+  - name: 📚 Documentation
+    url: https://github.com/Dc-Dev-Prog/to-do-day#-documentaci%C3%B3n-detallada
+    about: Revisa nuestra documentación completa antes de preguntar

@@ -1,176 +1,267 @@
-# Script Inteligente de Verificación de Paquetes Sui
-# Autor: Copilot Assistant - Refactorizado
-# Versión: 2.0
-
 param(
-    [Parameter(Mandatory=$false)]
     [string]$Red,
-    
-    [Parameter(Mandatory=$false)]
+    [string[]]$Redes = @(),
+    [switch]$Testnet,
+    [switch]$Mainnet,
+    [switch]$Devnet,
     [switch]$Detallado,
-    
-    [Parameter(Mandatory=$false)]
     [switch]$SoloActualizables
 )
 
-Write-Host "📦 VERIFICADOR INTELIGENTE DE PAQUETES SUI" -ForegroundColor Cyan
-Write-Host "=========================================" -ForegroundColor Cyan
+Write-Host "📦 VERIFICADOR DE PAQUETES SUI v4.0 (Simplificado)" -ForegroundColor Cyan
+Write-Host "===================================================" -ForegroundColor Cyan
 
-# Detectar red actual
-$redActual = sui client active-env
-Write-Host "🌐 Red actual: $redActual" -ForegroundColor Yellow
+# Determinar redes a verificar
+$redesAVerificar = @()
+if ($Testnet) { $redesAVerificar = @("testnet") }
+elseif ($Mainnet) { $redesAVerificar = @("mainnet") }
+elseif ($Devnet) { $redesAVerificar = @("devnet") }
+elseif ($Red) { $redesAVerificar = @($Red) }
+elseif ($Redes.Count -gt 0) { $redesAVerificar = $Redes }
+else { $redesAVerificar = @("testnet", "mainnet", "devnet") }
 
-# Si se especifica una red diferente, cambiar
-if ($Red -and $Red -ne $redActual) {
-    Write-Host "🔄 Cambiando a $Red..." -ForegroundColor Yellow
-    sui client switch --env $Red
-    if ($LASTEXITCODE -ne 0) {
-        Write-Host "❌ Error al cambiar a $Red" -ForegroundColor Red
-        exit 1
+Write-Host "🌐 Verificando: $($redesAVerificar -join ', ')" -ForegroundColor Yellow
+
+# Guardar red actual
+$redOriginal = sui client active-env
+
+# Función para verificar paquetes en una red específica
+function Get-PackagesInRed {
+    param([string]$Red)
+
+    Write-Host "`n🔍 VERIFICANDO EN $($Red.ToUpper())..." -ForegroundColor Magenta
+
+    # Cambiar a la red
+    if ($Red -ne $redOriginal) {
+        Write-Host "   🔄 Cambiando a $Red..." -ForegroundColor Gray
+        sui client switch --env $Red | Out-Null
     }
-    $redActual = $Red
-}
 
-# Función para formatear información de paquete
-function Format-PackageInfo {
-    param($packageId, $upgradeCapId = $null, $version = "N/A")
-    
-    Write-Host "`n📋 PAQUETE: $packageId" -ForegroundColor Green
-    Write-Host "   🏷️  Versión: $version" -ForegroundColor Gray
-    
-    if ($upgradeCapId) {
-        Write-Host "   🔑 UpgradeCap: $upgradeCapId" -ForegroundColor Blue
-        Write-Host "   ✅ Actualizable: SÍ" -ForegroundColor Green
-    } else {
-        Write-Host "   ❌ Actualizable: NO (inmutable)" -ForegroundColor Red
-    }
-    
-    if ($Detallado) {
-        Write-Host "   🔍 Obteniendo detalles..." -ForegroundColor Yellow
-        try {
-            $packageInfo = sui client object $packageId --json 2>$null | ConvertFrom-Json
-            if ($packageInfo) {
-                Write-Host "   📅 Creado: $($packageInfo.content.fields.version)" -ForegroundColor Gray
-            }
-        } catch {
-            Write-Host "   ⚠️  No se pudieron obtener detalles" -ForegroundColor Yellow
-        }
-    }
-}
+    $paquetesEncontrados = @{}
+    $upgradeCaps = @()
 
-# Buscar todos los UpgradeCaps en el wallet
-Write-Host "`n🔍 BUSCANDO UPGRADE CAPABILITIES..." -ForegroundColor Blue
-$objetos = sui client objects 2>&1
-$upgradeCaps = @()
-$paquetesEncontrados = @{}
+    try {
+        # Obtener objetos en formato JSON
+        $objetosJson = sui client objects --json 2>$null
+        if ($objetosJson) {
+            $objetos = $objetosJson | ConvertFrom-Json
 
-foreach ($linea in $objetos) {
-    if ($linea -match '(0x[a-f0-9]+).*UpgradeCap') {
-        $upgradeCapId = $matches[1]
-        $upgradeCaps += $upgradeCapId
-        
-        # Obtener información del paquete asociado
-        try {
-            $capInfo = sui client object $upgradeCapId --json 2>$null | ConvertFrom-Json
-            if ($capInfo -and $capInfo.content.fields.package) {
-                $packageId = $capInfo.content.fields.package
-                $version = $capInfo.content.fields.version
-                $paquetesEncontrados[$packageId] = @{
-                    UpgradeCap = $upgradeCapId
-                    Version = $version
+            foreach ($objeto in $objetos) {
+                if ($objeto.data.type -match "UpgradeCap") {
+                    $upgradeCapId = $objeto.data.objectId
+                    $upgradeCaps += $upgradeCapId
+
+                    if ($objeto.data.content.fields.package) {
+                        $packageId = $objeto.data.content.fields.package
+                        $version = $objeto.data.content.fields.version
+                        $paquetesEncontrados[$packageId] = @{
+                            UpgradeCap = $upgradeCapId
+                            Version    = $version
+                        }
+                        Write-Host "      ✅ UpgradeCap: $upgradeCapId" -ForegroundColor Green
+                        Write-Host "      📦 Paquete: $packageId" -ForegroundColor Gray
+                    }
                 }
             }
-        } catch {
-            Write-Host "   ⚠️  Error al obtener info de UpgradeCap: $upgradeCapId" -ForegroundColor Yellow
+        }
+
+        $totalPaquetes = $paquetesEncontrados.Count
+        Write-Host "   ✅ Encontrados $totalPaquetes paquete(s) actualizable(s)" -ForegroundColor Green
+
+        return @{
+            Red                 = $Red
+            PaquetesEncontrados = $paquetesEncontrados
+            UpgradeCaps         = $upgradeCaps
+            TotalPaquetes       = $totalPaquetes
+        }
+
+    }
+    catch {
+        Write-Host "   ❌ Error verificando $Red`: $($_.Exception.Message)" -ForegroundColor Red
+        return @{
+            Red                 = $Red
+            PaquetesEncontrados = @{}
+            UpgradeCaps         = @()
+            TotalPaquetes       = 0
         }
     }
 }
 
-# Cargar información de último despliegue si existe
-$ultimoDespliegueFile = ".script\ultimo-despliegue.txt"
-$ultimoDespliegue = $null
-if (Test-Path $ultimoDespliegueFile) {
-    $ultimoDespliegueContent = Get-Content $ultimoDespliegueFile -Raw
-    $ultimoPackageId = ($ultimoDespliegueContent | Select-String 'Package ID: (0x[a-f0-9]+)').Matches[0].Groups[1].Value
-    $ultimoUpgradeCap = ($ultimoDespliegueContent | Select-String 'Upgrade Cap ID: (0x[a-f0-9]+)').Matches[0].Groups[1].Value
-    $ultimaRed = ($ultimoDespliegueContent | Select-String 'Red: (\w+)').Matches[0].Groups[1].Value
-    
-    if ($ultimaRed -eq $redActual -and $ultimoPackageId) {
-        $ultimoDespliegue = @{
-            PackageId = $ultimoPackageId
-            UpgradeCap = $ultimoUpgradeCap
+# Función para generar reporte individual por red
+function New-ReporteRed {
+    param(
+        [string]$Red,
+        [hashtable]$Resultado
+    )
+
+    $timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
+    $fecha = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+
+    # Crear carpeta específica de la red
+    $carpetaRed = "docs\reports\check-packages\$Red"
+    if (-not (Test-Path $carpetaRed)) {
+        New-Item -Path $carpetaRed -ItemType Directory -Force | Out-Null
+    }
+
+    $archivo = "$carpetaRed\reporte-$Red-$timestamp.md"
+
+    # Obtener wallet
+    $walletOutput = sui client active-address 2>$null
+    $wallet = $walletOutput.Trim()
+
+    $paquetes = $Resultado.PaquetesEncontrados
+    $totalPaquetes = $Resultado.TotalPaquetes
+
+    $contenido = @"
+# 📦 Reporte de Paquetes SUI - $($Red.ToUpper())
+
+## ℹ️ Información General
+
+| Campo | Valor |
+|-------|-------|
+| **📅 Fecha** | $fecha |
+| **🌐 Red** | $($Red.ToUpper()) |
+| **👤 Wallet** | ``$wallet`` |
+| **📊 Total Paquetes** | $totalPaquetes |
+
+"@
+
+    if ($totalPaquetes -gt 0) {
+        $contenido += @"
+
+## 📋 Paquetes Encontrados
+
+| Package ID | UpgradeCap | Versión | Explorer |
+|------------|------------|---------|----------|
+"@
+        foreach ($paquete in $paquetes.GetEnumerator()) {
+            $contenido += "|``$($paquete.Key)`` | ``$($paquete.Value.UpgradeCap)`` | $($paquete.Value.Version) | [🔗](https://suiexplorer.com/object/$($paquete.Key)?network=$Red) |`n"
         }
     }
-}
+    else {
+        $contenido += @"
 
-# Mostrar resumen
-if ($paquetesEncontrados.Count -eq 0 -and -not $ultimoDespliegue) {
-    Write-Host "`n❌ NO SE ENCONTRARON PAQUETES DESPLEGADOS" -ForegroundColor Red
-    Write-Host "   💡 Consejos:" -ForegroundColor Yellow
-    Write-Host "      • Verifica que estés en la red correcta" -ForegroundColor Gray
-    Write-Host "      • Usa .\.script\deploy.ps1 para desplegar contratos" -ForegroundColor Gray
-    Write-Host "      • Revisa si tienes paquetes en otras redes" -ForegroundColor Gray
-    exit 0
-}
+## 🚫 Sin Paquetes
 
-Write-Host "`n📊 RESUMEN DE PAQUETES EN $redActual" -ForegroundColor Magenta
-Write-Host "================================" -ForegroundColor Magenta
+❌ **No se encontraron paquetes actualizables** en **$($Red.ToUpper())**.
 
-$totalPaquetes = 0
+### 💡 Posibles Razones:
+- No tienes contratos desplegados en esta red
+- Los contratos son inmutables (sin UpgradeCap)
+- Los contratos están en otra wallet
+- Problemas de conectividad
 
-# Mostrar paquete del último despliegue primero
-if ($ultimoDespliegue) {
-    Write-Host "`n⭐ ÚLTIMO DESPLIEGUE REGISTRADO:" -ForegroundColor Yellow
-    Format-PackageInfo -packageId $ultimoDespliegue.PackageId -upgradeCapId $ultimoDespliegue.UpgradeCap
-    $totalPaquetes++
-}
+### 🎯 Próximos Pasos:
+1. **Verificar Wallet**: [Ver en Explorer](https://suiexplorer.com/address/$wallet?network=$Red)
+2. **Desplegar Contrato**: ``.\.script\deploy.ps1``
+3. **Cambiar Red**: ``sui client switch --env $Red``
 
-# Mostrar otros paquetes encontrados
-if ($paquetesEncontrados.Count -gt 0) {
-    Write-Host "`n🔍 OTROS PAQUETES ACTUALIZABLES:" -ForegroundColor Blue
-    
-    foreach ($package in $paquetesEncontrados.GetEnumerator()) {
-        # Evitar duplicar el último despliegue
-        if ($ultimoDespliegue -and $package.Key -eq $ultimoDespliegue.PackageId) {
-            continue
-        }
-        
-        Format-PackageInfo -packageId $package.Key -upgradeCapId $package.Value.UpgradeCap -version $package.Value.Version
-        $totalPaquetes++
+"@
     }
+
+    $contenido += @"
+
+## 🛠️ Herramientas Disponibles
+
+### 📋 Verificación
+``````powershell
+# Verificar esta red
+.\.script\check-packages.ps1 -Red $Red
+
+# Verificar múltiples redes
+.\.script\check-packages.ps1 -Redes @("mainnet", "testnet")
+
+# Solo en testnet
+.\.script\check-packages.ps1 -SoloTestnet
+
+# Solo en mainnet
+.\.script\check-packages.ps1 -SoloMainnet
+
+# Solo en devnet
+.\.script\check-packages.ps1 -SoloDevnet
+``````
+
+### 🚀 Despliegue y Actualización
+``````bash
+# Nuevo despliegue
+.\.script\deploy.ps1
+
+# Actualizar paquete existente
+.\.script\upgrade.ps1
+
+# Estimar costos
+.\.script\calcular-costo-despliegue.ps1
+``````
+
+### 💰 Gestión de Fondos
+``````bash
+# Verificar saldos SUI
+.\.script\check-balance.ps1
+
+# Solo verificar $Red
+.\.script\check-balance.ps1 -Solo$($Red.Substring(0,1).ToUpper() + $Red.Substring(1))
+``````
+
+## 🔗 Enlaces Útiles
+
+- 🌐 **SUI Explorer**: [https://suiexplorer.com/?network=$Red](https://suiexplorer.com/?network=$Red)
+- 👤 **Tu Wallet**: [https://suiexplorer.com/address/$wallet?network=$Red](https://suiexplorer.com/address/$wallet?network=$Red)
+- 📚 **Documentación**: [https://docs.sui.io](https://docs.sui.io)
+- 🏗️ **Move Book**: [https://move-book.com](https://move-book.com)
+
+## 📄 Información del Reporte
+
+| Campo | Valor |
+|-------|-------|
+| **🏷️ Versión del Script** | 4.0 (Simplificado) |
+| **📅 Generado** | $fecha |
+| **🌐 Red Específica** | $($Red.ToUpper()) |
+| **⚡ Análisis** | Individual por Red |
+
+---
+
+*Creado con ❤️ por el equipo de desarrollo de **Dc Studio***
+"@
+
+    $contenido | Out-File -FilePath $archivo -Encoding UTF8
+    Write-Host "   📁 Reporte generado: $archivo" -ForegroundColor Green
 }
 
-# Buscar paquetes inmutables (sin UpgradeCap) si no es solo actualizables
-if (-not $SoloActualizables) {
-    Write-Host "`n🔒 BUSCANDO PAQUETES INMUTABLES..." -ForegroundColor Yellow
-    
-    # Aquí podrías implementar lógica para encontrar paquetes sin UpgradeCap
-    # Esto es más complejo porque requiere revisar transacciones históricas
-    Write-Host "   💡 Los paquetes inmutables requieren análisis de transacciones" -ForegroundColor Gray
-    Write-Host "   🔍 Para encontrarlos, revisa tus transacciones de publish en:" -ForegroundColor Gray
-    Write-Host "      https://suiexplorer.com" -ForegroundColor Blue
+# Procesar cada red individualmente
+$resultadosGlobales = @()
+foreach ($red in $redesAVerificar) {
+    $resultado = Get-PackagesInRed -Red $red
+    $resultadosGlobales += $resultado
+
+    # Generar reporte inmediatamente para esta red
+    New-ReporteRed -Red $red -Resultado $resultado
 }
 
-# Estadísticas finales
-Write-Host "`n📈 ESTADÍSTICAS:" -ForegroundColor Cyan
-Write-Host "   📦 Total paquetes actualizables: $totalPaquetes"
-Write-Host "   🔑 UpgradeCaps disponibles: $($upgradeCaps.Count)"
-Write-Host "   🌐 Red actual: $redActual"
+# Restaurar red original
+sui client switch --env $redOriginal | Out-Null
 
-# Sugerencias de próximos pasos
+# Resumen final
+$totalGlobal = ($resultadosGlobales | Measure-Object TotalPaquetes -Sum).Sum
+Write-Host "`n📊 RESUMEN FINAL:" -ForegroundColor Cyan
+Write-Host "   📦 Total paquetes encontrados: $totalGlobal" -ForegroundColor White
+Write-Host "   🌐 Redes verificadas: $($redesAVerificar.Count)" -ForegroundColor White
+
+foreach ($resultado in $resultadosGlobales) {
+    $red = $resultado.Red
+    $total = $resultado.TotalPaquetes
+    $icono = if ($total -gt 0) { "✅" } else { "❌" }
+    Write-Host "   └─ $red`: $total paquetes $icono" -ForegroundColor Gray
+}
+
 Write-Host "`n🎯 PRÓXIMOS PASOS:" -ForegroundColor Magenta
-if ($totalPaquetes -gt 0) {
-    Write-Host "   • Para actualizar: .\.script\upgrade.ps1"
-    Write-Host "   • Para calcular costos: .\.script\calcular-costo-despliegue.ps1"
-    Write-Host "   • Para nuevo despliegue: .\.script\deploy.ps1"
-} else {
-    Write-Host "   • Para desplegar: .\.script\deploy.ps1"
-    Write-Host "   • Para cambiar red: sui client switch --env <red>"
+if ($totalGlobal -gt 0) {
+    Write-Host "   • Para actualizar: .\.script\upgrade.ps1" -ForegroundColor White
+    Write-Host "   • Para calcular costos: .\.script\calcular-costo-despliegue.ps1" -ForegroundColor White
+    Write-Host "   • Para nuevo despliegue: .\.script\deploy.ps1" -ForegroundColor White
+}
+else {
+    Write-Host "   • Para desplegar: .\.script\deploy.ps1" -ForegroundColor White
+    Write-Host "   • Para cambiar red: sui client switch --env <red>" -ForegroundColor White
 }
 
-Write-Host "`n🔧 OPCIONES DEL SCRIPT:" -ForegroundColor Gray
-Write-Host "   .\.script\check-packages.ps1 -Red testnet    # Verificar en testnet"
-Write-Host "   .\.script\check-packages.ps1 -Detallado     # Información detallada"
-Write-Host "   .\.script\check-packages.ps1 -SoloActualizables  # Solo paquetes actualizables"
-
-Write-Host "`n✅ Verificación completa!" -ForegroundColor Green
+Write-Host "`n✅ Verificación completa! Reportes guardados en docs\reports\check-packages\" -ForegroundColor Green

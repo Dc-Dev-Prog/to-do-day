@@ -81,6 +81,18 @@ Planificación financiera para tus despliegues:
 - Planificación financiera para proyectos
 - Costos por red (testnet, mainnet, devnet)
 
+### Verificador de Saldos Multi-Red
+
+**[Documentación del Check Balance Script](script/check-balance-script.md)**
+
+Control completo de tus saldos en todas las redes:
+
+- Verificación automática en testnet, mainnet y devnet
+- Conversión a USD en tiempo real
+- Estado visual de cada balance (suficiente/bajo/vacío)
+- Preserva tu configuración de red original
+- Recomendaciones personalizadas según tus saldos
+
 ---
 
 ## [Casos de Uso Específicos](#documentación-detallada)

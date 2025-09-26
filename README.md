@@ -2,7 +2,13 @@
 
 # To-Do-Day - Proyecto Sui con Move
 
-[![Sui](https://img.shields.io/badge/Sui-4285f4?style=for-the-badge&logo=sui&logoColor=white)](https://sui.io/)
+| Script | Descripción | Documentación |
+|--------|-------------|---------------|
+| 🚀 `deploy.ps1` | **Script Inteligente de Despliegue** - Despliega contratos con detección automática de red y opciones actualizables | [📖 Ver Documentación](docs/script/deploy-script.md) |
+| 🔄 `upgrade.ps1` | **Script Inteligente de Actualización** - Actualiza contratos existentes con detección automática de UpgradeCaps | [📖 Ver Documentación](docs/script/upgrade-script.md) |
+| 📦 `check-packages.ps1` | **Verificador de Paquetes** - Analiza y muestra todos los paquetes desplegados con sus capabilities | [📖 Ver Documentación](docs/script/check-packages-script.md) |
+| 💰 `calcular-costo-despliegue.ps1` | **Calculadora de Costos** - Estima costos de despliegue y actualización con conversión a USD | [📖 Ver Documentación](docs/script/cost-calculator-script.md) |
+| 💰 `check-balance.ps1` | **Verificador de Saldos Multi-Red** - Revisa saldos en testnet, mainnet y devnet con conversión USD | [📖 Ver Documentación](docs/script/check-balance-script.md) |](https://img.shields.io/badge/Sui-4285f4?style=for-the-badge&logo=sui&logoColor=white)](https://sui.io/)
 [![Move](https://img.shields.io/badge/Move-000000?style=for-the-badge&logo=move&logoColor=white)](https://move-language.github.io/move/)
 [![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white)](https://docs.microsoft.com/en-us/powershell/)
 

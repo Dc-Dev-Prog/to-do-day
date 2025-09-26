@@ -1,0 +1,111 @@
+# 🚀 INSTALACIÓN RÁPIDA - WALLET MANAGER SUI
+# Ejecutar desde la carpeta raíz del proyecto
+
+param(
+    [switch]$Help
+)
+
+if ($Help) {
+    Write-Host "
+🚀 INSTALACIÓN WALLET MANAGER SUI
+================================
+
+USO:
+    .\install-wallet-manager.ps1
+
+ACCIONES:
+- ✅ Verifica estructura de carpetas
+- ✅ Crea accesos directos
+- ✅ Prueba funcionamiento
+- ✅ Muestra ayuda de uso
+
+UBICACIÓN FINAL:
+- .\.script\wallet-manager\
+" -ForegroundColor Green
+    return
+}
+
+$ErrorActionPreference = "Stop"
+$BaseDir = $PSScriptRoot
+
+Write-Host "
+🚀 INSTALANDO WALLET MANAGER SUI
+===============================
+" -ForegroundColor Yellow
+
+# Verificar ubicación
+$WalletDir = Join-Path $BaseDir ".script\wallet-manager"
+if (!(Test-Path $WalletDir)) {
+    Write-Host "❌ Error: No se encuentra la carpeta wallet-manager" -ForegroundColor Red
+    Write-Host "📍 Se esperaba en: $WalletDir" -ForegroundColor Yellow
+    return
+}
+
+Write-Host "✅ Carpeta wallet-manager encontrada" -ForegroundColor Green
+
+# Verificar archivos principales
+$MainScript = Join-Path $WalletDir "wallet-manager.ps1"
+$ReadmeFile = Join-Path $WalletDir "README.md"
+
+if (!(Test-Path $MainScript)) {
+    Write-Host "❌ Error: Script principal no encontrado" -ForegroundColor Red
+    return
+}
+
+Write-Host "✅ Script principal verificado" -ForegroundColor Green
+
+# Crear acceso directo en la raíz
+$ShortcutPath = Join-Path $BaseDir "wallet-manager-quick.ps1"
+$ShortcutContent = @"
+# 💼 ACCESO RÁPIDO - WALLET MANAGER SUI
+# Ejecuta el wallet manager desde cualquier ubicación
+
+`$WalletScript = Join-Path `$PSScriptRoot ".script\wallet-manager\wallet-manager.ps1"
+
+if (Test-Path `$WalletScript) {
+    & `$WalletScript @args
+} else {
+    Write-Host "❌ Error: Wallet manager no encontrado en .script\wallet-manager\" -ForegroundColor Red
+    Write-Host "💡 Ejecuta .\install-wallet-manager.ps1 para verificar instalación" -ForegroundColor Yellow
+}
+"@
+
+Set-Content -Path $ShortcutPath -Value $ShortcutContent -Encoding UTF8
+Write-Host "✅ Acceso rápido creado: wallet-manager-quick.ps1" -ForegroundColor Green
+
+# Probar funcionamiento
+Write-Host "
+🔍 PROBANDO FUNCIONAMIENTO...
+============================" -ForegroundColor Cyan
+
+try {
+    $TestResult = & $MainScript -Lista 2>&1
+    if ($LASTEXITCODE -eq 0 -or $TestResult -match "WALLETS") {
+        Write-Host "✅ Wallet Manager funcionando correctamente" -ForegroundColor Green
+    } else {
+        Write-Host "⚠️  Advertencia: Respuesta inesperada del script" -ForegroundColor Yellow
+    }
+} catch {
+    Write-Host "❌ Error durante la prueba: $($_.Exception.Message)" -ForegroundColor Red
+}
+
+# Mostrar ayuda de uso
+Write-Host "
+📋 USO RÁPIDO:
+==============
+Desde la raíz del proyecto:
+    .\wallet-manager-quick.ps1 -Lista
+    .\wallet-manager-quick.ps1 -Balance -Red all
+    .\wallet-manager-quick.ps1 -Export
+
+Desde la carpeta wallet-manager:
+    cd .\.script\wallet-manager
+    .\wallet-manager.ps1 -Lista
+
+📖 DOCUMENTACIÓN COMPLETA:
+    .\.script\wallet-manager\README.md
+    .\.script\wallet-manager\examples\EJEMPLOS.md
+
+🎉 INSTALACIÓN COMPLETADA
+========================
+" -ForegroundColor Green

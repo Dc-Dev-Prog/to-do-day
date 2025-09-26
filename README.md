@@ -2,13 +2,32 @@
 
 # To-Do-Day - Proyecto Sui con Move
 
-| Script | Descripción | Documentación |
-|--------|-------------|---------------|
-| 🚀 `deploy.ps1` | **Script Inteligente de Despliegue** - Despliega contratos con detección automática de red y opciones actualizables | [📖 Ver Documentación](docs/script/deploy-script.md) |
-| 🔄 `upgrade.ps1` | **Script Inteligente de Actualización** - Actualiza contratos existentes con detección automática de UpgradeCaps | [📖 Ver Documentación](docs/script/upgrade-script.md) |
-| 📦 `check-packages.ps1` | **Verificador de Paquetes** - Analiza y muestra todos los paquetes desplegados con sus capabilities | [📖 Ver Documentación](docs/script/check-packages-script.md) |
-| 💰 `calcular-costo-despliegue.ps1` | **Calculadora de Costos** - Estima costos de despliegue y actualización con conversión a USD | [📖 Ver Documentación](docs/script/cost-calculator-script.md) |
-| 💰 `check-balance.ps1` | **Verificador de Saldos Multi-Red** - Revisa saldos en testnet, mainnet y devnet con conversión USD | [📖 Ver Documentación](docs/script/check-balance-script.md) |](https://img.shields.io/badge/Sui-4285f4?style=for-the-badge&logo=sui&logoColor=white)](https://sui.io/)
+## 📦 Sistemas Organizados
+
+### 🗂️ **Packages Manager** - Gestión Completa de Paquetes
+Sistema completo organizado para el manejo de paquetes SUI con reportes por tarea.
+
+| Script | Descripción | Ubicación |
+|--------|-------------|-----------|
+| 🚀 `deploy.ps1` | **Despliegue Inteligente** - Despliega contratos con detección automática de red | [📁 packages-manager/](\.script\packages-manager\README.md) |
+| 🔄 `upgrade.ps1` | **Actualización** - Actualiza contratos existentes con UpgradeCaps | [� packages-manager/](\.script\packages-manager\README.md) |
+| 📦 `check-packages.ps1` | **Verificación** - Analiza paquetes desplegados con capabilities | [� packages-manager/](\.script\packages-manager\README.md) |
+| 🔍 `inspect-package.ps1` | **Inspección** - Análisis detallado de paquetes específicos | [📁 packages-manager/](\.script\packages-manager\README.md) |
+| 💰 `calcular-costo-despliegue.ps1` | **Costos** - Estimación de costos con conversión USD | [� packages-manager/](\.script\packages-manager\README.md) |
+
+### � **Wallet Manager** - Gestión Completa de Wallets
+Sistema elegante para manejo de wallets con formato visual y reportes organizados.
+
+| Script | Descripción | Ubicación |
+|--------|-------------|-----------|
+| 💼 `wallet-manager.ps1` | **Gestor Completo** - Wallets con formato visual y consultas multi-red | [� wallet-manager/](.script/wallet-manager/README.md) |
+
+### 🔧 **Scripts Independientes**
+| Script | Descripción | Ubicación |
+|--------|-------------|-----------|
+| 💰 `check-balance.ps1` | **Verificador de Saldos** - Saldos multi-red con conversión USD | [📁 .script/](docs/script/check-balance-script.md) |
+
+[![Sui](https://img.shields.io/badge/Sui-4285f4?style=for-the-badge&logo=sui&logoColor=white)](https://sui.io/)
 [![Move](https://img.shields.io/badge/Move-000000?style=for-the-badge&logo=move&logoColor=white)](https://move-language.github.io/move/)
 [![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white)](https://docs.microsoft.com/en-us/powershell/)
 
